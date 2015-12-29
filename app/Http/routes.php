@@ -35,4 +35,5 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/home', 'HomeController@index');
     Route::get('/account', 'AccountsController@index');
     Route::get('/account/edit/{id}', 'AccountsController@edit');
+    Route::post('/account/store', 'AccountsController@store');
 });
