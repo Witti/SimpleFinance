@@ -39,7 +39,7 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/home') }}">
                     SimpleFinance
                 </a>
             </div>
@@ -49,6 +49,19 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
                     <li><a href="{{ url('/account') }}">Accounts</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            Entries <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            @if(!Auth::guest())
+                                @foreach($accounts as $account)
+                                    <li><a href="{{ url('/entry/account/', ['id' => $account->id]) }}">{{ $account->title }}</a></li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

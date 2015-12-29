@@ -30,7 +30,7 @@ Route::group(['middleware' => ['web']], function () {
     //
 });
 
-Route::group(['middleware' => 'web'], function () {
+Route::group(['middleware' => 'web', 'menu'], function () {
     Route::auth();
     Route::get('/home', 'HomeController@index');
     Route::get('/account', 'AccountsController@index');
