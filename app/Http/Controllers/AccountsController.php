@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 use App\Account;
 
@@ -22,6 +23,16 @@ class AccountsController extends Controller
     }
 
     public function index() {
-        //return Account::where('user_id',Auth::user()->id)->get();
+        return view('account/index',['accounts' => Account::where('user_id',Auth::user()->id)->get()]);
+    }
+
+    public function edit($id) {
+
+        $account = Account::findOrFail(1);
+        if($account->user_id === Auth::user()->id) {
+            return view('account/edit',['account' => $account]);
+        }
+
+        return false;
     }
 }
