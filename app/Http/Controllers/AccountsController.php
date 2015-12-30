@@ -38,16 +38,29 @@ class AccountsController extends Controller
         return false;
     }
 
-    public function store() {
+    public function update() {
         $account = Account::findOrFail(Input::get('id'));
         if($account->user_id === Auth::user()->id) {
             $account->title = Input::get('title');
             $account->startbalance = Input::get('startbalance');
             $account->save();
             return redirect('account')->with('status', 'Account updated!');
-
         }
 
         return false;
+    }
+
+    public function store() {
+        $account = New Account();
+        $account->title = Input::get('title');
+        $account->startbalance = Input::get('startbalance');
+        $account->user_id = Auth::user()->id;
+        $account->save();
+
+        return redirect('account')->with('status', 'Account created!');
+    }
+
+    public function create() {
+        return view('account/create');
     }
 }

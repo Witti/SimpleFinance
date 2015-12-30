@@ -5,17 +5,15 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Account: {{ $account->title }}</div>
+                    <div class="panel-heading">New Account</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/account/update') }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/account/store') }}">
                             {!! csrf_field() !!}
-                            <input type="hidden" name="id" value="{{ $account->id }}">
-
                             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Title</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="title" value="{{ $account->title }}">
+                                    <input type="text" class="form-control" name="title" value="{{ old('title') }}">
 
                                     @if ($errors->has('title'))
                                         <span class="help-block">
@@ -29,7 +27,7 @@
                                 <label class="col-md-4 control-label">Startbalance</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="startbalance" value="{{ $account->startbalance }}">
+                                    <input type="text" class="form-control" name="startbalance" value="{{ old('startbalance') }}">
 
                                     @if ($errors->has('title'))
                                         <span class="help-block">
@@ -42,7 +40,7 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
-                                        <i class="glyphicon glyphicon-piggy-bank"></i> Update
+                                        Create
                                     </button>
                                 </div>
                             </div>

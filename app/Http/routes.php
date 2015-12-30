@@ -35,5 +35,7 @@ Route::group(['middleware' => 'web', 'menu'], function () {
     Route::get('/home', 'HomeController@index');
     Route::get('/account', 'AccountsController@index');
     Route::get('/account/edit/{id}', 'AccountsController@edit');
+    Route::post('/account/update', 'AccountsController@update');
     Route::post('/account/store', 'AccountsController@store');
+    Route::get('/account/create', 'AccountsController@create');
 });
