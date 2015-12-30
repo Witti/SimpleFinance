@@ -4,10 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Entry extends Model
+class Transaction extends Model
 {
-    protected $table = "entries";
-
     protected $fillable = ['label','amount','type'];
 
     public function account() {
