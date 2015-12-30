@@ -12,8 +12,8 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
 
     <!-- Styles -->
-    {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/css/bootstrap-select.min.css">
 
     <style>
         body {
@@ -51,13 +51,26 @@
                     <li><a href="{{ url('/account') }}">Accounts</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            Entries <span class="caret"></span>
+                            Transactions <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
                             @if(!Auth::guest())
                                 @foreach($accounts as $account)
-                                    <li><a href="{{ url('/entry/account/', ['id' => $account->id]) }}">{{ $account->title }}</a></li>
+                                    <li><a href="{{ url('/transaction/account', ['id' => $account->id]) }}">{{ $account->title }}</a></li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            Add Transaction <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            @if(!Auth::guest())
+                                @foreach($accounts as $account)
+                                    <li><a href="{{ url('/transaction/create/account', ['id' => $account->id]) }}">{{ $account->title }}</a></li>
                                 @endforeach
                             @endif
                         </ul>
@@ -95,8 +108,17 @@
     @yield('content')
 
     <!-- JavaScripts -->
-    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/js/bootstrap-select.min.js"></script>
+
+    <script>
+        $('.selectpicker').selectpicker({
+            style: 'btn-primary',
+            size: 4,
+            liveSearch: true
+        });
+    </script>
+
 </body>
 </html>

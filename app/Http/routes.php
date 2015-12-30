@@ -38,4 +38,5 @@ Route::group(['middleware' => 'web', 'menu'], function () {
     Route::post('/account/update', 'AccountsController@update');
     Route::post('/account/store', 'AccountsController@store');
     Route::get('/account/create', 'AccountsController@create');
+    Route::get('/transaction/create/account/{id}', 'TransactionsController@create');
 });

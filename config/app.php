@@ -155,7 +155,9 @@ return [
         SimpleFinance\Providers\AuthServiceProvider::class,
         SimpleFinance\Providers\EventServiceProvider::class,
         SimpleFinance\Providers\RouteServiceProvider::class,
-        SimpleFinance\Providers\MenuComposerServiceProvider::class
+        SimpleFinance\Providers\MenuComposerServiceProvider::class,
+
+        Collective\Html\HtmlServiceProvider::class,
 
     ],
 
@@ -202,6 +204,8 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+        'Form'      => Collective\Html\FormFacade::class,
+        'Html'      => Collective\Html\HtmlFacade::class,
 
     ],
 
