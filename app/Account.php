@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace SimpleFinance;
 
 use Illuminate\Database\Eloquent\Model;
 

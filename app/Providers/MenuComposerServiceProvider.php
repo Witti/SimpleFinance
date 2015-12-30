@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Providers;
+namespace SimpleFinance\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Account;
+use SimpleFinance\Account;
 use Illuminate\Support\Facades\Auth;
 
 class MenuComposerServiceProvider extends ServiceProvider

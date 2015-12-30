@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace SimpleFinance\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use SimpleFinance\Http\Requests;
+use SimpleFinance\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 
-use App\Account;
+use SimpleFinance\Account;
 use Illuminate\Support\Facades\Redirect;
 
 class AccountsController extends Controller

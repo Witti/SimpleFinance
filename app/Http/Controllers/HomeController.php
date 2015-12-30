@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace SimpleFinance\Http\Controllers;
 
-use App\Http\Requests;
+use SimpleFinance\Http\Requests;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller

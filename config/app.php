@@ -151,11 +151,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-        App\Providers\MenuComposerServiceProvider::class
+        SimpleFinance\Providers\AppServiceProvider::class,
+        SimpleFinance\Providers\AuthServiceProvider::class,
+        SimpleFinance\Providers\EventServiceProvider::class,
+        SimpleFinance\Providers\RouteServiceProvider::class,
+        SimpleFinance\Providers\MenuComposerServiceProvider::class
 
     ],
 
