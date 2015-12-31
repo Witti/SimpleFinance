@@ -61,7 +61,9 @@ class TransactionsController extends Controller
     public function accountlist($accountid) {
         $account = Account::findOrFail($accountid);
         if($account->user_id === Auth::user()->id) {
-            return Transaction::where('account_id',$accountid)->get()->toArray();
+            $transactions = Transaction::where('account_id',$accountid)->get();
+            $currentbalance = Transaction::where('account_id',$accountid)->sum('amount');
+            return view('transaction/list',compact('account','transactions','currentbalance'));
         } else {
             return redirect('home')->with('status', 'You are not allowed to view transactions of this account.');
         }
