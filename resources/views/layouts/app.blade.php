@@ -50,6 +50,7 @@
                     @if (!Auth::guest())
                     <li><a href="{{ url('/home') }}">Home</a></li>
                     <li><a href="{{ url('/account') }}">Accounts</a></li>
+                    <li><a href="{{ url('/category') }}">Categories</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             Transactions <span class="caret"></span>
