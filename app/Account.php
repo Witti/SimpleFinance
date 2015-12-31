@@ -3,6 +3,8 @@
 namespace SimpleFinance;
 
 use Illuminate\Database\Eloquent\Model;
+use \NumberFormatter;
+use \Locale;
 
 class Account extends Model
 {
@@ -10,5 +12,15 @@ class Account extends Model
 
     public function owner() {
         return $this->belongsTo(User::class);
+    }
+
+    public function getStartbalanceAttribute($value) {
+        return number_format ( $value ,2, ",", "." );
+    }
+
+    public function setStartbalanceAttribute($value) {
+        $locale = Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+        $fmt = new NumberFormatter( $locale, NumberFormatter::DECIMAL );
+        $this->attributes['startbalance'] = $fmt->parse($value);
     }
 }
