@@ -7,8 +7,22 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">New Account</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/account/store') }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/transaction/store') }}">
                             {!! csrf_field() !!}
+
+                            <div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Type</label>
+
+                                <div class="col-md-6">
+                                    {!! Form::select('type', ['expense' => 'Expense','income' => 'Income'], old('type'),['class' => 'selectpicker']) !!}
+
+                                    @if ($errors->has('type'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('type') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
 
                             <div class="form-group{{ $errors->has('accountid') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Account</label>
@@ -43,7 +57,7 @@
                                 <label class="col-md-4 control-label">Label</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="title" value="{{ old('label') }}">
+                                    <input type="text" class="form-control" name="label" value="{{ old('label') }}">
 
                                     @if ($errors->has('label'))
                                         <span class="help-block">

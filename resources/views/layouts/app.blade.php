@@ -47,6 +47,7 @@
             <div class="collapse navbar-collapse" id="spark-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
+                    @if (!Auth::guest())
                     <li><a href="{{ url('/home') }}">Home</a></li>
                     <li><a href="{{ url('/account') }}">Accounts</a></li>
                     <li class="dropdown">
@@ -75,6 +76,7 @@
                             @endif
                         </ul>
                     </li>
+                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->

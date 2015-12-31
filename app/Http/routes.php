@@ -30,7 +30,7 @@ Route::group(['middleware' => ['web']], function () {
     //
 });
 
-Route::group(['middleware' => 'web', 'menu'], function () {
+Route::group(['middleware' => 'web'], function () {
     Route::auth();
     Route::get('/home', 'HomeController@index');
     Route::get('/account', 'AccountsController@index');
@@ -38,5 +38,7 @@ Route::group(['middleware' => 'web', 'menu'], function () {
     Route::post('/account/update', 'AccountsController@update');
     Route::post('/account/store', 'AccountsController@store');
     Route::get('/account/create', 'AccountsController@create');
+    Route::get('/transaction/account/{id}', 'TransactionsController@accountlist');
     Route::get('/transaction/create/account/{id}', 'TransactionsController@create');
+    Route::post('/transaction/store', 'TransactionsController@store');
 });
