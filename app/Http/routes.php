@@ -42,6 +42,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/transaction/account/{id}', 'TransactionsController@accountlist');
     Route::get('/transaction/create/account/{id}', 'TransactionsController@create');
     Route::post('/transaction/store', 'TransactionsController@store');
+    Route::get('/transaction/delete/{id}', 'TransactionsController@delete');
+    Route::get('/transaction/edit/{id}', 'TransactionsController@edit');
+    Route::post('/transaction/update/{id}', 'TransactionsController@update');
     Route::get('/category', 'CategoriesController@index');
     Route::get('/category/create', 'CategoriesController@create');
     Route::post('/category/store', 'CategoriesController@store');

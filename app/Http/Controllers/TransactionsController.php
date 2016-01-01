@@ -46,13 +46,12 @@ class TransactionsController extends Controller
         if($account->user_id === Auth::user()->id) {
             $transaction = New Transaction();
             $transaction->account_id = $account->id;
-            $transaction->amount = Input::get('amount');
             $transaction->category_id = Input::get('category_id');
             $transaction->label = Input::get('label');
             $transaction->type = Input::get('type');
+            $transaction->amount = Input::get('amount');
             $transaction->save();
-            return redirect('home')->with('status', 'Transaction created');
-
+            return redirect('/transaction/account/' . $account->id)->with('status', 'Transaction created');
         } else {
             return redirect('home')->with('status', 'You are not allowed to add an transaction to this account.');
         }
@@ -61,11 +60,49 @@ class TransactionsController extends Controller
     public function accountlist($accountid) {
         $account = Account::findOrFail($accountid);
         if($account->user_id === Auth::user()->id) {
-            $transactions = Transaction::where('account_id',$accountid)->get();
-            $currentbalance = Transaction::where('account_id',$accountid)->sum('amount');
+            $transactions = Transaction::where('account_id',$accountid)->orderBy('transactiondate','DESC')->get();
+            $currentbalance = (float)$account->startbalance + Transaction::where('account_id',$accountid)->sum('amount');
             return view('transaction/list',compact('account','transactions','currentbalance'));
         } else {
             return redirect('home')->with('status', 'You are not allowed to view transactions of this account.');
         }
+    }
+
+    public function delete($id) {
+        $transaction = Transaction::findOrFail($id);
+
+        if($transaction->account->user_id === Auth::user()->id) {
+            $transaction->delete();
+            return redirect('/transaction/account/' . $transaction->account->id)->with('status', 'Transaction deleted');
+        }
+
+        return false;
+    }
+
+    public function edit($id) {
+        $transaction = Transaction::findOrFail($id);
+        $account = $transaction->account;
+        $categories = Category::where('user_id',Auth::user()->id)->get()->lists('title','id');
+
+        if($account->user_id === Auth::user()->id) {
+            return view('transaction/edit',compact('transaction','categories'));
+        }
+
+        return false;
+    }
+
+    public function update($id) {
+        $transaction = Transaction::findOrFail($id);
+
+        if($transaction->account->user_id === Auth::user()->id) {
+            $transaction->category_id = Input::get('category_id');
+            $transaction->label = Input::get('label');
+            $transaction->type = Input::get('type');
+            $transaction->amount = Input::get('amount');
+            $transaction->save();
+            return redirect('/transaction/account/' . $transaction->account->id)->with('status', 'Transaction updated');
+        }
+
+        return false;
     }
 }
