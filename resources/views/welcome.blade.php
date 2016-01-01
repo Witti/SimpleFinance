@@ -8,7 +8,7 @@
                 <div class="panel-heading">Welcome</div>
 
                 <div class="panel-body">
-                    Your Application's Landing Page.
+                    Welcome to the alpha-version of SimpleFinance, the simple trackingtool for your financial transactions.
                 </div>
             </div>
         </div>
