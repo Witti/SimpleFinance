@@ -121,6 +121,12 @@
             size: 4,
             liveSearch: true
         });
+
+        $('.delthis').click(function(e) {
+            if (!window.confirm('Are you sure?')) {
+                e.preventDefault();
+            }
+        });
     </script>
 
 </body>

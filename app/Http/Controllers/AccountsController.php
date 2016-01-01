@@ -88,4 +88,15 @@ class AccountsController extends Controller
     public function create() {
         return view('account/create');
     }
+
+    public function delete($id) {
+        $account = Account::findOrFail($id);
+        if($account->user_id === Auth::user()->id) {
+            $account->delete();
+            return redirect('account')->with('status', 'Account deleted!');
+        }
+
+        return false;
+
+    }
 }

@@ -54,4 +54,13 @@ class CategoriesController extends Controller
         }
         return false;
     }
+
+    public function delete($id) {
+        $c = Category::findOrFail($id);
+        if($c->user_id === Auth::user()->id) {
+            $c->delete();
+            return redirect('category')->with('status', 'Category deleted!');
+        }
+        return false;
+    }
 }

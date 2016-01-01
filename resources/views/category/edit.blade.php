@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Edit Category - {{ $category->title }}</div>
+                    <div class="panel-heading">Edit Category - {{ $category->title }}<a href="{{ url('/category/delete', ['id' => $category->id]) }}" class="pull-right text-danger delthis">Delete category</a></div>
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/category/update', ['id' => $category->id]) }}">
                             {!! csrf_field() !!}
