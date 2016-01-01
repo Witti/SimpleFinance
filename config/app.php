@@ -156,6 +156,7 @@ return [
         SimpleFinance\Providers\EventServiceProvider::class,
         SimpleFinance\Providers\RouteServiceProvider::class,
         SimpleFinance\Providers\MenuComposerServiceProvider::class,
+        SimpleFinance\Providers\OwnerInjectionServiceProvider::class,
 
         Collective\Html\HtmlServiceProvider::class,
 
