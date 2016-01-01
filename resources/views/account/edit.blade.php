@@ -29,7 +29,7 @@
                                 <label class="col-md-4 control-label">Startbalance</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="startbalance" value="{{ $account->startbalance }}">
+                                    <input type="text" class="form-control" name="startbalance" value="{{ $account->startbalanceFormatted }}">
 
                                     @if ($errors->has('title'))
                                         <span class="help-block">

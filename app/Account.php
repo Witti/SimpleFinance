@@ -14,8 +14,8 @@ class Account extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function getStartbalanceAttribute($value) {
-        return number_format ( $value ,2, ",", "." );
+    public function getStartbalanceFormattedAttribute() {
+        return number_format ( $this->startbalance ,2, ",", "." );
     }
 
     public function setStartbalanceAttribute($value) {
