@@ -159,6 +159,7 @@ return [
         SimpleFinance\Providers\OwnerInjectionServiceProvider::class,
 
         Collective\Html\HtmlServiceProvider::class,
+        Jenssegers\Rollbar\RollbarServiceProvider::class,
 
     ],
 
