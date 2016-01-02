@@ -27,7 +27,10 @@
                                 <label class="col-md-4 control-label">Color</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="color" value="{{ old('color') }}">
+                                    <div class="input-group categorycolor">
+                                        <input type="text" value="#{{ old('color',substr(md5(rand()), 0, 6)) }}" name="color" class="form-control" />
+                                        <span class="input-group-addon"><i></i></span>
+                                    </div>
 
                                     @if ($errors->has('color'))
                                         <span class="help-block">

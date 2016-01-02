@@ -80,6 +80,22 @@
                                 </div>
                             </div>
 
+                            <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Amount</label>
+
+                                <div class="col-md-6">
+                                    <div class="input-group date">
+                                        <input type="text" class="form-control" name="transactiondate" value="@if( $transaction->transactiondate != '0000-00-00'){{ date('d.m.Y',strtotime($transaction->transactiondate)) }}@else{{ $transaction->created_at->format('d.m.Y') }}@endif" data-date-format="dd.mm.yyyy"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                    </div>
+
+                                    @if ($errors->has('amount'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('amount') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">

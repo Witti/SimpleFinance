@@ -13,4 +13,14 @@ class Category extends Model
     public function owner() {
         return $this->belongsTo(User::class);
     }
+
+    public function getColorAttribute($value) {
+        return '#' . $value;
+    }
+
+    public function setColorAttribute($value) {
+        if(strpos($value,'#') !== false) {
+            $this->attributes['color'] = ltrim($value,'#');
+        }
+    }
 }

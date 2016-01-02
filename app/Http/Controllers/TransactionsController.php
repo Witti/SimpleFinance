@@ -49,6 +49,7 @@ class TransactionsController extends Controller
             $transaction->category_id = Input::get('category_id');
             $transaction->label = Input::get('label');
             $transaction->type = Input::get('type');
+            $transaction->transactiondate = date('Y-m-d',strtotime(Input::get('transactiondate')));
             $transaction->amount = Input::get('amount');
             $transaction->save();
             return redirect('/transaction/account/' . $account->id)->with('status', 'Transaction created');
@@ -96,6 +97,7 @@ class TransactionsController extends Controller
 
         if($transaction->account->user_id === Auth::user()->id) {
             $transaction->category_id = Input::get('category_id');
+            $transaction->transactiondate = date('Y-m-d',strtotime(Input::get('transactiondate')));
             $transaction->label = Input::get('label');
             $transaction->type = Input::get('type');
             $transaction->amount = Input::get('amount');

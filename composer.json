@@ -9,7 +9,9 @@
         "laravel/framework": "5.2.*",
         "cviebrock/eloquent-sluggable": "^3.1",
         "laravelcollective/html": "^5.2",
-        "jenssegers/rollbar": "^1.4"
+        "guzzlehttp/guzzle": "~5.3|~6.0",
+        "jenssegers/rollbar": "^1.4",
+        "jedrzej/pimpable": "0.0.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
