@@ -28,7 +28,7 @@
 
                                 <div class="col-md-6">
                                     <div class="input-group categorycolor">
-                                        <input type="text" value="#{{ old('color') }}" name="color" class="form-control" />
+                                        <input type="text" value="#{{ old('color',substr(md5(rand()), 0, 6)) }}" name="color" class="form-control" />
                                         <span class="input-group-addon"><i></i></span>
                                     </div>
 
