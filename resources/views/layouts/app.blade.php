@@ -25,6 +25,13 @@
         .fa-btn {
             margin-right: 6px;
         }
+
+        .category-color-box {
+            width: 1.5em;
+            height:1.5em;
+            border: 1px solid #DDDDDD;
+            display: inline-block;
+        }
     </style>
 </head>
 <body id="app-layout">
