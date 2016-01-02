@@ -12,7 +12,7 @@ class CreateAppNewsItems extends Migration
      */
     public function up()
     {
-        Schema::table('appnewsitems', function (Blueprint $table) {
+        Schema::create('appnewsitems', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
             $table->text('content');
