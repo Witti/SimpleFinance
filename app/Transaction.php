@@ -7,8 +7,14 @@ use \Numberformatter;
 use \IntlDateFormatter;
 use \Locale;
 
+use Jedrzej\Searchable\SearchableTrait;
+
 class Transaction extends Model
 {
+
+    use SearchableTrait;
+
+    public $searchable = ['label'];
     protected $fillable = ['label','amount','type'];
     protected $dates = ['created_at', 'updated_at', 'transactiondate'];
     public $locale = false;
@@ -37,7 +43,6 @@ class Transaction extends Model
         if($this->attributes['amount'] > 0 && $this->type == 'expense') {
             $this->attributes['amount'] = $this->attributes['amount'] * -1;
         }
-
     }
 
     public function getTransactiondateAttribute($value) {
