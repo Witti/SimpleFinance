@@ -7,11 +7,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.7/jquery.slimscroll.min.jss"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
+<!-- iCheck -->
+<script src="/plugins/iCheck/icheck.min.js"></script>
+
 <!-- AdminLTE App -->
 <script src="/js/app.min.js"></script>
-
-<!-- AdminLTE for demo purposes -->
-<!--<script src="../../dist/js/demo.js"></script>-->
 
 <script>
     $('.selectpicker').selectpicker({
@@ -33,6 +33,12 @@
 
     $('.categorycolor').colorpicker({
         format: "hex"
+    });
+
+    $('input').iCheck({
+        checkboxClass: 'icheckbox_square-blue',
+        radioClass: 'iradio_square-blue',
+        increaseArea: '20%' // optional
     });
 </script>
 

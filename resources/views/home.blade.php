@@ -1,17 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container spark-screen">
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
-                <div class="panel-body">
-                    Welcome!
-                </div>
-            </div>
+        <!-- Main content -->
+<section class="content">
+    @include('layouts.partials.alert')
+            <!-- Default box -->
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Dashboard</h3>
         </div>
-    </div>
-</div>
+        <div class="box-body">
+            <div class="panel-body">
+                    Welcome!
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+</section><!-- /.content -->
 @endsection

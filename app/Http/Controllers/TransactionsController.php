@@ -35,7 +35,12 @@ class TransactionsController extends Controller
         $categories = Category::where('user_id',Auth::user()->id)->get()->lists('title','id');
 
         if($account->user_id === Auth::user()->id) {
-            return view('transaction/create', compact('account','categories'));
+            if($categories) {
+                return view('transaction/create', compact('account', 'categories'));
+            }
+            else {
+                return redirect('/category/create')->with('status', 'Please create a Category before you create a transaction.');
+            }
         }
 
         return false;

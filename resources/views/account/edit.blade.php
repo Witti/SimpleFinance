@@ -1,12 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container spark-screen">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Account: {{ $account->title }} <a href="{{ url('/account/delete', ['id' => $account->id]) }}" class="pull-right text-danger delthis">Delete account</a></div>
-                    <div class="panel-body">
+        <!-- Main content -->
+<section class="content">
+    @include('layouts.partials.alert')
+            <!-- Default box -->
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Account edit - {{ $account->title }}</h3>
+            <div class="box-tools pull-right">
+                <a href="{{ url('/account/delete', ['id' => $account->id]) }}" class="text-danger delthis">Delete account</a>
+            </div>
+        </div>
+        <div class="box-body">
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/account/update') }}">
                             {!! csrf_field() !!}
                             <input type="hidden" name="id" value="{{ $account->id }}">
@@ -47,9 +53,7 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        </div><!-- /.box-body -->
+    </div><!-- /.box -->
+</section><!-- /.content -->
 @endsection
