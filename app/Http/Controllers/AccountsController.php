@@ -29,7 +29,8 @@ class AccountsController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index() {
-        return view('account/index',['accounts' => Account::where('user_id',Auth::user()->id)->get()]);
+        $accounts = Account::where('user_id',Auth::user()->id)->with('transactions')->get();
+        return view('account/index',compact('accounts'));
     }
 
     /**

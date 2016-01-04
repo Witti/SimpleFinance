@@ -13,11 +13,22 @@
             </div>
         </div>
         <div class="box-body">
-            <ul>
+            <table id="accountstable" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Accountname</th>
+                        <th>Current balance</th>
+                    </tr>
+                </thead>
+                <tbody>
                 @foreach($accounts as $a)
-                    <li><a href="{{ url('/account/edit',['id' => $a->id]) }}">{{ $a->title }}</a></li>
+                    <tr>
+                        <td><a href="{{ url('/account/edit',['id' => $a->id]) }}">{{ $a->title }}</a></td>
+                        <td>{{ $a->currentBalance }}</td>
+                    </tr>
                 @endforeach
-            </ul>
+                </tbody>
+            </table>
         </div><!-- /.box-body -->
     </div><!-- /.box -->
 </section><!-- /.content -->

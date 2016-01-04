@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
     <link rel="stylesheet" href="/plugins/iCheck/square/blue.css">
+    <link rel="stylesheet" href="/plugins/datatables/dataTables.bootstrap.css">
 
     <!-- Theme style -->
     <link rel="stylesheet" href="/css/AdminLTE.min.css">
