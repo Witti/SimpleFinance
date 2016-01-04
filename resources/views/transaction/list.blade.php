@@ -13,7 +13,11 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    <table class="table table-striped table-hover">
+                    <div class="pull-right" style="margin-bottom:1em;">
+                        <strong>Current balance {{ number_format ( $currentbalance ,2, ",", "." ) }}</strong>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <table id="transactionstable" class="table table-striped table-hover">
                         <thead>
                         <tr>
                             <th>Date</th>
@@ -24,12 +28,6 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="@if($currentbalance < 0) danger @endif">
-                            <td>&nbsp;</td>
-                            <td align="left"><strong>Current balance</strong></td>
-                            <td colspan="2" align="right"><strong>{{ number_format ( $currentbalance ,2, ",", "." ) }}</strong></td>
-                            <td>&nbsp;</td>
-                        </tr>
                         @foreach($transactions as $t)
                             <tr class="@if($t->type == "expense") warning @else success @endif">
                                 <td>
@@ -52,6 +50,11 @@
                         </tbody>
                     </table>
                 </div><!-- /.box-body -->
+                <div class="box-footer">
+                    <div class="pull-right">
+                        <strong>Current balance {{ number_format ( $currentbalance ,2, ",", "." ) }}</strong>
+                    </div>
+                </div>
             </div><!-- /.box -->
         </section><!-- /.content -->
 

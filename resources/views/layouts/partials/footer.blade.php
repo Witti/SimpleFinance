@@ -42,11 +42,21 @@
         radioClass: 'iradio_square-blue',
         increaseArea: '20%' // optional
     });
+
     $('#accountstable').DataTable({
         "paging": false,
         "lengthChange": false,
         "searching": true,
         "ordering": true,
+        "info": true,
+        "autoWidth": true
+    });
+
+    $('#transactionstable').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": true,
+        "ordering": false,
         "info": true,
         "autoWidth": true
     });
