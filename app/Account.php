@@ -14,6 +14,10 @@ class Account extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function transactions() {
+        return $this->hasMany(Transaction::class);
+    }
+
     public function getStartbalanceFormattedAttribute() {
         return number_format ( $this->startbalance ,2, ",", "." );
     }
@@ -22,5 +26,10 @@ class Account extends Model
         $locale = Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
         $fmt = new NumberFormatter( $locale, NumberFormatter::DECIMAL );
         $this->attributes['startbalance'] = $fmt->parse($value);
+    }
+
+    public function getCurrentBalanceAttribute() {
+        $transactions = $this->transactions;
+        return number_format((float)$this->startbalance + $transactions->sum('amount'),2,",",".");
     }
 }
