@@ -43,12 +43,12 @@
         increaseArea: '20%' // optional
     });
 
-    $('#accountstable').DataTable({
+    $('#accountstable, #categoriestable').DataTable({
         "paging": false,
         "lengthChange": false,
         "searching": true,
         "ordering": true,
-        "info": true,
+        "info": false,
         "autoWidth": true
     });
 

@@ -14,7 +14,7 @@
         </div>
         <div class="box-body">
             <div class="panel-body">
-                <table class="table table-striped table-hover table-responsive">
+                <table id="categoriestable" class="table table-striped table-hover table-responsive">
                     <thead>
                         <tr>
                             <th>Category</th>
