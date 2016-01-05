@@ -43,6 +43,10 @@ class Transaction extends Model
         if($this->attributes['amount'] > 0 && $this->type == 'expense') {
             $this->attributes['amount'] = $this->attributes['amount'] * -1;
         }
+
+        if($this->attributes['amount'] < 0 && $this->type == 'income') {
+            $this->attributes['amount'] = $this->attributes['amount'] * -1;
+        }
     }
 
     public function getTransactiondateAttribute($value) {
@@ -54,5 +58,9 @@ class Transaction extends Model
             IntlDateFormatter::GREGORIAN
         );
         return $fmt->format(strtotime($value));
+    }
+
+    public function transferTransaction() {
+        return $this->belongsTo(Transaction::class,'transfer_id','id');
     }
 }

@@ -32,11 +32,12 @@ class TransactionsController extends Controller
      */
     public function create($account_id) {
         $account = Account::findOrFail($account_id);
+        $accounts = Account::where('user_id',Auth::user()->id)->get()->lists('title','id');
         $categories = Category::where('user_id',Auth::user()->id)->get()->lists('title','id');
 
         if($account->user_id === Auth::user()->id) {
             if($categories) {
-                return view('transaction/create', compact('account', 'categories'));
+                return view('transaction/create', compact('account','accounts', 'categories'));
             }
             else {
                 return redirect('/category/create')->with('status', 'Please create a Category before you create a transaction.');
@@ -57,6 +58,36 @@ class TransactionsController extends Controller
             $transaction->transactiondate = date('Y-m-d',strtotime(Input::get('transactiondate')));
             $transaction->amount = Input::get('amount');
             $transaction->save();
+
+            if(Input::get('transfer') && Input::get('transfer_account_id')) {
+
+                $transferAccount = Account::findOrFail(Input::get('transfer_account_id'));
+                if($transferAccount->user_id === Auth::user()->id) {
+
+                    if (Input::get('type') == 'expense') {
+                        $transferTransactionType = 'income';
+                    } else {
+                        $transferTransactionType = 'expense';
+                    }
+
+                    $transferTransaction = New Transaction();
+                    $transferTransaction->account_id = Input::get('transfer_account_id');
+                    $transferTransaction->category_id = Input::get('category_id');
+                    $transferTransaction->label = Input::get('label');
+                    $transferTransaction->type = $transferTransactionType;
+                    $transferTransaction->transactiondate = date('Y-m-d', strtotime(Input::get('transactiondate')));
+                    $transferTransaction->amount = Input::get('amount');
+                    $transferTransaction->transfer_id = $transaction->id;
+                    $transferTransaction->save();
+
+                    $transaction->transfer_id = $transferTransaction->id;
+                    $transaction->save();
+                }
+                else {
+                    return redirect('home')->with('status', 'You are not allowed to add an transaction to this account.');
+                }
+            }
+
             return redirect('/transaction/account/' . $account->id)->with('status', 'Transaction created');
         } else {
             return redirect('home')->with('status', 'You are not allowed to add an transaction to this account.');
@@ -78,6 +109,10 @@ class TransactionsController extends Controller
         $transaction = Transaction::findOrFail($id);
 
         if($transaction->account->user_id === Auth::user()->id) {
+            if($transaction->transfer_id) {
+                $transferTransaction = Transaction::findOrFail($transaction->transfer_id);
+                $transferTransaction->delete();
+            }
             $transaction->delete();
             return redirect('/transaction/account/' . $transaction->account->id)->with('status', 'Transaction deleted');
         }
@@ -88,10 +123,11 @@ class TransactionsController extends Controller
     public function edit($id) {
         $transaction = Transaction::findOrFail($id);
         $account = $transaction->account;
+        $accounts = Account::where('user_id',Auth::user()->id)->get()->lists('title','id');
         $categories = Category::where('user_id',Auth::user()->id)->get()->lists('title','id');
 
         if($account->user_id === Auth::user()->id) {
-            return view('transaction/edit',compact('transaction','categories'));
+            return view('transaction/edit',compact('transaction','accounts','categories'));
         }
 
         return false;
@@ -106,7 +142,41 @@ class TransactionsController extends Controller
             $transaction->label = Input::get('label');
             $transaction->type = Input::get('type');
             $transaction->amount = Input::get('amount');
+
+
+            if(Input::get('transfer') && Input::get('transfer_account_id')) {
+                $transferAccount = Account::findOrFail(Input::get('transfer_account_id'));
+                if($transferAccount->user_id === Auth::user()->id) {
+
+                    if (Input::get('type') == 'expense') {
+                        $transferTransactionType = 'income';
+                    } else {
+                        $transferTransactionType = 'expense';
+                    }
+
+                    $transferTransaction = Transaction::findOrNew($transaction->transfer_id);
+                    $transferTransaction->account_id = Input::get('transfer_account_id');
+                    $transferTransaction->category_id = Input::get('category_id');
+                    $transferTransaction->label = Input::get('label');
+                    $transferTransaction->type = $transferTransactionType;
+                    $transferTransaction->transactiondate = date('Y-m-d', strtotime(Input::get('transactiondate')));
+                    $transferTransaction->amount = Input::get('amount');
+                    $transferTransaction->transfer_id = $transaction->id;
+                    $transferTransaction->save();
+
+                    $transaction->transfer_id = $transferTransaction->id;
+                    $transaction->save();
+                }
+                else {
+                    return redirect('home')->with('status', 'You are not allowed to add an transaction to this account.');
+                }
+            }
+            else {
+                $transaction->transfer_id = NULL;
+            }
+
             $transaction->save();
+
             return redirect('/transaction/account/' . $transaction->account->id)->with('status', 'Transaction updated');
         }
 

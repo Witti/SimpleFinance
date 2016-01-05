@@ -34,6 +34,9 @@
                                     {{ $t->transactiondate }}
                                 </td>
                                 <td>
+                                    @if($t->transfer_id)
+                                        <a href="{{ url('/transaction/account', ['id' => $t->transferTransaction->account->id]) }}" data-toggle="tooltip" data-placement="top" title="Transfer - {{ $t->transferTransaction->account->title }}"><i class="fa fa-retweet"></i></a>
+                                    @endif
                                     {{ $t->label }}
                                 </td>
                                 <td>

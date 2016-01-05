@@ -60,6 +60,21 @@
         "info": true,
         "autoWidth": true
     });
+
+    if($('.transfer-checkbox').is(':checked')){
+        $('.transfer-account-fg').show();
+    } else {
+        $('.transfer-account-fg').hide();
+    }
+
+    $('.transfer-checkbox').on('ifChecked', function(event){
+        $('.transfer-account-fg').show();
+    });
+    $('.transfer-checkbox').on('ifUnchecked', function(event){
+        $('.transfer-account-fg').hide();
+    });
+
+    $('[data-toggle="tooltip"]').tooltip()
 </script>
 
 <!-- Piwik -->
