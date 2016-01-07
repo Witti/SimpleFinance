@@ -74,7 +74,7 @@
                         <label class="col-md-4 control-label">Amount</label>
 
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="amount" value="{{ $transaction->amount }}">
+                            <input type="text" class="form-control" name="amount" value="{{ $transaction->amountFormatted }}">
 
                             @if ($errors->has('amount'))
                                 <span class="help-block">

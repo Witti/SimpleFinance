@@ -43,7 +43,7 @@
                                     {{ $t->category->title }}
                                 </td>
                                 <td align="right">
-                                    {{ $t->amount }}
+                                    {{ $t->amountFormatted }}
                                 </td>
                                 <td align="right">
                                     <a href="{{ url('/transaction/edit', ['id' => $t->id]) }}" class="text-warning"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> <a class="text-danger delthis" href="{{ url('/transaction/delete', ['id' => $t->id]) }}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
