@@ -24,9 +24,9 @@
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
-            <li><a href="{{ url('/category') }}"><i class="fa fa-child"></i> <span>Categories</span></a></li>
-            <li><a href="{{ url('/account') }}"><i class="fa fa-university"></i> <span>Accounts</span></a></li>
-            <li class="treeview">
+            <li class="{{setActive('category')}}"><a href="{{ url('/category') }}"><i class="fa fa-child"></i> <span>Categories</span></a></li>
+            <li class="{{setActive('account')}}"><a href="{{ url('/account') }}"><i class="fa fa-university"></i> <span>Accounts</span></a></li>
+            <li class="treeview {{setActiveTree('transaction')}}">
                 <a href="#">
                     <i class="fa fa-align-justify"></i> <span>Transactions</span>
                     <i class="fa fa-angle-left pull-right"></i>
@@ -49,7 +49,7 @@
                 <ul class="treeview-menu">
                     @if($accounts)
                         @foreach($accounts as $account)
-                            <li><a href="{{ url('/transaction/create/account', ['id' => $account->id]) }}"><i class="fa fa-circle-o"></i> {{ $account->title }}</a></li>
+                            <li class="active"><a href="{{ url('/transaction/create/account', ['id' => $account->id]) }}"><i class="fa fa-circle-o"></i> {{ $account->title }}</a></li>
                         @endforeach
                     @else
                         <li><a href="{{ url('/account/create') }}"><i class="fa fa-circle-o"></i> Create account</a></li>
