@@ -29,7 +29,8 @@
             "SimpleFinance\\": "app/"
         },
         "files": [
-            "app/Helpers/gravatar.php"
+            "app/Helpers/gravatar.php",
+			"app/Helpers/activeState.php"
         ]
     },
     "autoload-dev": {
