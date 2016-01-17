@@ -119,6 +119,24 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('lending') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Create lending</label>
+
+                            <div class="col-md-6">
+                                <div class="checkbox icheck">
+                                    <label>
+                                        <input type="checkbox" name="lending" class="lending-checkbox">
+                                    </label>
+                                </div>
+
+                                @if ($errors->has('lending'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('lending') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="transfer-account-fg form-group{{ $errors->has('transfer_account_id') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Transferaccount</label>
 
