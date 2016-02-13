@@ -119,6 +119,20 @@
                             </div>
                         </div>
 
+                        <div class="transfer-account-fg form-group{{ $errors->has('transfer_account_id') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Transferaccount</label>
+
+                            <div class="col-md-6">
+                                {!! Form::select('transfer_account_id', $accounts, old('transfer_account_id'),['class' => 'selectpicker']) !!}
+
+                                @if ($errors->has('transfer_account_id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('transfer_account_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('lending') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Create lending</label>
 
@@ -137,19 +151,6 @@
                             </div>
                         </div>
 
-                        <div class="transfer-account-fg form-group{{ $errors->has('transfer_account_id') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Transferaccount</label>
-
-                            <div class="col-md-6">
-                                {!! Form::select('transfer_account_id', $accounts, old('transfer_account_id'),['class' => 'selectpicker']) !!}
-
-                                @if ($errors->has('transfer_account_id'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('transfer_account_id') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">

@@ -49,4 +49,14 @@ class LendingsController extends Controller
             return redirect('home')->with('status', 'You are not allowed to add a lending to this transaction.');
         }
     }
+
+    public function show($lendingid) {
+        $lending = Lending::findOrFail($lendingid);
+        if($lending->transaction->account->id == Auth::user()->id) {
+            return view('lending.edit', compact('lending'));
+        }
+        else {
+            return redirect('home')->with('status', 'You are not allowed to view this lending.');
+        }
+    }
 }
