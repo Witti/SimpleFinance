@@ -63,4 +63,8 @@ class Transaction extends Model
     public function transferTransaction() {
         return $this->belongsTo(Transaction::class,'transfer_id','id');
     }
+
+    public function lending() {
+        return $this->belongsTo(Lending::class, 'lending_id','id');
+    }
 }

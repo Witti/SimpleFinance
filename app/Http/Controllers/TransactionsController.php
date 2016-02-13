@@ -60,7 +60,6 @@ class TransactionsController extends Controller
             $transaction->save();
 
             if(Input::get('transfer') && Input::get('transfer_account_id')) {
-
                 $transferAccount = Account::findOrFail(Input::get('transfer_account_id'));
                 if($transferAccount->user_id === Auth::user()->id) {
 
@@ -86,6 +85,10 @@ class TransactionsController extends Controller
                 else {
                     return redirect('home')->with('status', 'You are not allowed to add an transaction to this account.');
                 }
+            }
+
+            if(Input::get('lending')) {
+                return redirect('/lending/create/transaction/' . $transaction->id)->with('status','Transaction created, now you can create the lending.');
             }
 
             return redirect('/transaction/account/' . $account->id)->with('status', 'Transaction created');

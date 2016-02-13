@@ -56,6 +56,7 @@
                     @endif
                 </ul>
             </li>
+            <li class="{{setActive('lending')}}"><a href="{{ url('/lending') }}"><i class="fa fa-medkit"></i> <span>Lendings</span></a></li>
         </ul>
         @endif
     </section>
