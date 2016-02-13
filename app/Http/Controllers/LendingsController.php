@@ -24,7 +24,7 @@ class LendingsController extends Controller
 
     public function createFromTransaction($transactionid) {
         $transaction = Transaction::findOrFail($transactionid);
-        if($transaction->account->id == Auth::user()->id) {
+        if($transaction->account->owner->id == Auth::user()->id) {
             return view('lending.create',compact('transaction'));
         }
         else {
@@ -34,7 +34,7 @@ class LendingsController extends Controller
 
     public function store($transactionid) {
         $transaction = Transaction::findOrFail($transactionid);
-        if($transaction->account->id == Auth::user()->id) {
+        if($transaction->account->owner->id == Auth::user()->id) {
             $person = New Person();
             $person->firstname = Input::get('firstname');
             $person->lastname = Input::get('lastname');
@@ -60,11 +60,29 @@ class LendingsController extends Controller
 
     public function show($lendingid) {
         $lending = Lending::findOrFail($lendingid);
-        if($lending->transaction->account->id == Auth::user()->id) {
+        if($lending->transaction->account->owner->id == Auth::user()->id) {
             return view('lending.edit', compact('lending'));
         }
         else {
             return redirect('home')->with('status', 'You are not allowed to view this lending.');
+        }
+    }
+
+    public function update($lendingid) {
+        $lending = Lending::findOrFail($lendingid);
+        if($lending->transaction->account->owner->id == Auth::user()->id) {
+            $lending->person->firstname = Input::get('firstname');
+            $lending->person->lastname = Input::get('lastname');
+            $lending->person->email = Input::get('email');
+            $lending->person->phone = Input::get('phone');
+            $lending->deadline = date('Y-m-d',strtotime(Input::get('deadline')));
+            $lending->person->save();
+            $lending->save();
+
+            return redirect('/lending')->with('status', 'Lending updated');
+        }
+        else {
+            return redirect('home')->with('status', 'You are not allowed to edit this lending.');
         }
     }
 
@@ -82,7 +100,7 @@ class LendingsController extends Controller
 
     public function reopen($lendingid) {
         $lending = Lending::findOrFail($lendingid);
-        if($lending->transaction->account->id == Auth::user()->id) {
+        if($lending->transaction->account->owner->id == Auth::user()->id) {
             $lending->paid = 0;
             $lending->save();
             return redirect('/lending')->with('status', 'Bummer, lending reopen, hope the best.');
