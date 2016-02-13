@@ -51,4 +51,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/category/edit/{id}', 'CategoriesController@edit');
     Route::post('/category/update/{id}', 'CategoriesController@update');
     Route::get('/category/delete/{id}', 'CategoriesController@delete');
+    Route::get('/lending', 'LendingsController@index');
+    Route::get('/lending/create/transaction/{id}', 'LendingsController@createFromTransaction');
+    Route::post('lending/store/{id}', 'LendingsController@store');
+    Route::post('lending/update/{id}', 'LendingsController@update');
+    Route::get('/lending/{id}', 'LendingsController@show');
+    Route::get('/lending/close/{id}', 'LendingsController@close');
+    Route::get('/lending/reopen/{id}', 'LendingsController@reopen');
 });
