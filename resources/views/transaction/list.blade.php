@@ -37,6 +37,9 @@
                                     @if($t->transfer_id)
                                         <a href="{{ url('/transaction/account', ['id' => $t->transferTransaction->account->id]) }}" data-toggle="tooltip" data-placement="top" title="Transfer - {{ $t->transferTransaction->account->title }}"><i class="fa fa-retweet"></i></a>
                                     @endif
+                                    @if($t->lending_id)
+                                        <a href="{{ url('/lending', ['id' => $t->lending_id]) }}" class="@if($t->lending->paid) text-success @else text-danger @endif" title="edit lending"><i class="fa fa-medkit" aria-hidden="true"></i></a>
+                                    @endif
                                     {{ $t->label }}
                                 </td>
                                 <td>
@@ -47,11 +50,11 @@
                                 </td>
                                 <td align="right">
                                     @if($t->lending_id)
-                                        <a href="{{ url('/lending', ['id' => $t->lending_id]) }}" class="text-warning" title="edit lending"><i class="fa fa-medkit" aria-hidden="true"></i></a>
+                                        <a href="{{ url('/lending', ['id' => $t->lending_id]) }}" class="text-primary" title="edit lending"><i class="fa fa-medkit" aria-hidden="true"></i></a>
                                     @else
-                                        <a href="{{ url('/lending/create/transaction', ['id' => $t->id]) }}" class="text-warning" title="create lending from transaction"><i class="fa fa-medkit" aria-hidden="true"></i></a>
+                                        <a href="{{ url('/lending/create/transaction', ['id' => $t->id]) }}" class="text-primary" title="create lending from transaction"><i class="fa fa-medkit" aria-hidden="true"></i></a>
                                     @endif
-                                        <a href="{{ url('/transaction/edit', ['id' => $t->id]) }}" class="text-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a> <a class="text-danger delthis" href="{{ url('/transaction/delete', ['id' => $t->id]) }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                        <a href="{{ url('/transaction/edit', ['id' => $t->id]) }}" class="text-primary"><i class="fa fa-pencil" aria-hidden="true"></i></a> <a class="text-primary delthis" href="{{ url('/transaction/delete', ['id' => $t->id]) }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                         @endforeach

@@ -18,7 +18,7 @@
                         <label class="col-md-4 control-label">Firstname</label>
 
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="firstname" value="{{ $lending->person->firstname }} }}">
+                            <input type="text" class="form-control" name="firstname" value="{{ $lending->person->firstname }}">
 
                             @if ($errors->has('firstname'))
                                 <span class="help-block">
@@ -91,9 +91,15 @@
                             <button type="submit" class="btn btn-primary">
                                 Update lending
                             </button>
-                            <a href="#" class="btn btn-success">
-                                Close lending (got the money)
-                            </a>
+                            @if(!$lending->paid)
+                                <a href="{{ url('/lending/close', ['id' => $lending->id]) }}" class="btn btn-success delthis">
+                                    Close lending (got the money)
+                                </a>
+                            @else
+                                <a href="{{ url('/lending/reopen', ['id' => $lending->id]) }}" class="btn btn-danger delthis">
+                                    Reopen lending
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </form>
