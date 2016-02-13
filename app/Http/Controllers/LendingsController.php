@@ -88,7 +88,7 @@ class LendingsController extends Controller
 
     public function close($lendingid) {
         $lending = Lending::findOrFail($lendingid);
-        if($lending->transaction->account->id == Auth::user()->id) {
+        if($lending->transaction->account->owner->id == Auth::user()->id) {
             $lending->paid = 1;
             $lending->save();
             return redirect('/lending')->with('status', 'Wohoo, good to hear that you got your money back! Lending closed.');
