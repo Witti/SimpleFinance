@@ -37,7 +37,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/account/edit/{id}', 'AccountsController@edit');
     Route::post('/account/update', 'AccountsController@update');
     Route::post('/account/store', 'AccountsController@store');
-    Route::get('/account/create', 'AccountsController@create');
     Route::get('/account/delete/{id}', 'AccountsController@delete');
     Route::get('/transaction/account/{id}', 'TransactionsController@accountlist');
     Route::get('/transaction/create/account/{id}', 'TransactionsController@create');
@@ -46,7 +45,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/transaction/edit/{id}', 'TransactionsController@edit');
     Route::post('/transaction/update/{id}', 'TransactionsController@update');
     Route::get('/category', 'CategoriesController@index');
-    Route::get('/category/create', 'CategoriesController@create');
     Route::post('/category/store', 'CategoriesController@store');
     Route::get('/category/edit/{id}', 'CategoriesController@edit');
     Route::post('/category/update/{id}', 'CategoriesController@update');

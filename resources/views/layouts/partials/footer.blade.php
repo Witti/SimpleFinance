@@ -6,6 +6,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.3.0/js/bootstrap-colorpicker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.7/jquery.slimscroll.min.jss"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 <script src="/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="/plugins/datatables/dataTables.bootstrap.min.js"></script>
 
@@ -76,6 +77,35 @@
 
     $('[data-toggle="tooltip"]').tooltip()
 </script>
+
+@if(isset($categoryusage) && $categoryusage && count($categoryusage) > 0)
+    <script>
+        var pieChartCanvas = $("#categoryusageChart").get(0).getContext("2d");
+        var pieChart = new Chart(pieChartCanvas);
+
+        var PieData = [
+            @foreach($categoryusage as $c)
+                {
+                    value: {{ $c->total }},
+                    color: "#{{ $c->color }}",
+                    label: "{{ $c->title }}"
+                },
+            @endforeach
+        ];
+        var pieOptions = {
+            segmentShowStroke: false,
+            segmentStrokeWidth: 1,
+            percentageInnerCutout: 15, // This is 0 for Pie charts
+            animationSteps: 100,
+            animationEasing: "easeOutBounce",
+            animateRotate: true,
+            animateScale: true,
+            responsive: true,
+            maintainAspectRatio: false,
+        };
+        pieChart.Doughnut(PieData, pieOptions);
+    </script>
+@endif
 
 <!-- Piwik -->
 <script type="text/javascript">
