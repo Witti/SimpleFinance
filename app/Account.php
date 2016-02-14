@@ -32,4 +32,9 @@ class Account extends Model
         $transactions = $this->transactions;
         return number_format((float)$this->startbalance + $transactions->sum('amount'),2,",",".");
     }
+
+    public function getCurrentBalanceRawAttribute() {
+        $transactions = $this->transactions;
+        return (float)$this->startbalance + $transactions->sum('amount');
+    }
 }
