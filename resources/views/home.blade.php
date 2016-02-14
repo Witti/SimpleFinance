@@ -28,7 +28,7 @@
                         <div class="icon">
                             <i class="ion @if($a->currentBalanceRaw < 0) ion-arrow-graph-down-right @else ion-arrow-graph-up-right @endif"></i>
                         </div>
-                        <a href="#" class="small-box-footer">
+                        <a href="{{ url('/transaction/account', ['id' => $a->id]) }}" class="small-box-footer">
                             show transactions <i class="fa fa-arrow-circle-right"></i>
                         </a>
                     </div>
