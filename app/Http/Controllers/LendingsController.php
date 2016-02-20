@@ -14,6 +14,15 @@ use SimpleFinance\Transaction;
 
 class LendingsController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index() {
         $lendings = Lending::whereHas('transaction.account', function ($query) {
             $query->where('user_id', '=', Auth::user()->id);
