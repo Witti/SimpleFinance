@@ -47,5 +47,9 @@
             border: 1px solid #DDDDDD;
             display: inline-block;
         }
+
+        .lendingtransactiondetails dd {
+            margin-bottom: 1.5em;
+        }
     </style>
 </head>

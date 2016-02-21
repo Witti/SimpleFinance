@@ -6,3 +6,4 @@ Homestead.json
 .vagrant
 .idea
 .DS_Store
+.phpintel/
