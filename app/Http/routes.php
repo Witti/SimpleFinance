@@ -27,11 +27,10 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+    Route::auth();
 });
 
-Route::group(['middleware' => 'web'], function () {
-    Route::auth();
+Route::group(['middleware' => ['web','auth']], function () {
     Route::get('/home', 'HomeController@index');
     Route::get('/account', 'AccountsController@index');
     Route::get('/account/edit/{id}', 'AccountsController@edit');
@@ -56,4 +55,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/lending/{id}', 'LendingsController@show');
     Route::get('/lending/close/{id}', 'LendingsController@close');
     Route::get('/lending/reopen/{id}', 'LendingsController@reopen');
+    Route::get('/user','UsersController@edit');
+    Route::post('/user','UsersController@update');
 });

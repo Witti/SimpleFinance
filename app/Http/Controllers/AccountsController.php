@@ -15,15 +15,6 @@ use Illuminate\Support\Facades\Redirect;
 class AccountsController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * load account index
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
