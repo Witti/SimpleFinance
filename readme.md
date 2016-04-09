@@ -1,6 +1,6 @@
 ## SimpleFinance
 
-A simple tool for calculating your income and expenses.
+A simple tool for tracking your income and expenses.
 
 ### License
 
