@@ -176,4 +176,22 @@ class TransactionsController extends Controller
 
         return false;
     }
+    
+    /**
+     * show form for duplication process
+     *
+     * @param $transaction_id
+     * @return \Illuminate\View\View|bool
+     */
+    public function duplicate($id) {
+        $transaction = Transaction::findOrFail($id);
+        $accounts = Account::where('user_id',Auth::user()->id)->get()->lists('title','id');
+        $categories = Category::where('user_id',Auth::user()->id)->get()->lists('title','id');
+
+        if($account->user_id === Auth::user()->id) {
+            return view('transaction/duplicate',compact('transaction','accounts','categories'));
+        }
+
+        return false;
+    }
 }
