@@ -85,7 +85,7 @@
                     </div>
 
                     <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
-                        <label class="col-md-4 control-label">Amount</label>
+                        <label class="col-md-4 control-label">Date</label>
 
                         <div class="col-md-6">
                             <div class="input-group date">
