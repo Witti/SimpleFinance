@@ -18,7 +18,7 @@
                             <label class="col-md-4 control-label">Type</label>
 
                             <div class="col-md-6">
-                                {!! Form::select('type', ['expense' => 'Expense','income' => 'Income'], old('type'),['class' => 'selectpicker']) !!}
+                                {!! Form::select('type', ['expense' => 'Expense','income' => 'Income'], old('type'),['class' => 'form-control']) !!}
 
                                 @if ($errors->has('type'))
                                     <span class="help-block">
