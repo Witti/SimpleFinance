@@ -7,7 +7,7 @@
             <!-- Default box -->
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title">Edit transaction</h3>
+            <h3 class="box-title">Duplicate Transaction</h3>
         </div>
         <div class="box-body">
             <div class="panel-body">
@@ -33,6 +33,7 @@
 
                         <div class="col-md-6">
                             <input type="text" class="form-control" name="accountname" value="{{ $transaction->account->title }}" disabled="disabled">
+                            <input type="hidden" name="accountid" value="{{ $transaction->account->id }}">
 
                             @if ($errors->has('accountid'))
                                 <span class="help-block">
