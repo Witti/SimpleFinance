@@ -40,6 +40,19 @@
                         </div>
                     </div>
 
+                    <div class="form-group{{ $errors->has('finanicaloverview') ? ' has-error' : '' }}">
+                        <label class="col-md-4 control-label">Include to Financial Overview</label>
+
+                        <div class="col-md-6">
+                            <input type="checkbox" class="form-control" name="finanicaloverview">
+                            @if ($errors->has('finanicaloverview'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('finanicaloverview') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
                             <button type="submit" class="btn btn-primary">
@@ -60,13 +73,15 @@
                     <thead>
                         <tr>
                             <th>Accountname</th>
-                            <th>Current balance</th>
+                            <th>Included in Financial Overview</th>
+                            <th>Current Balance</th>
                         </tr>
                     </thead>
                     <tbody>
                     @foreach($accounts as $a)
                         <tr>
                             <td><a href="{{ url('/account/edit',['id' => $a->id]) }}">{{ $a->title }}</a></td>
+                            <td>@if($a->finanicaloverview)<i class="fa fa-check-circle" aria-hidden="true">@endif</i></td>
                             <td>{{ $a->currentBalance }}</td>
                         </tr>
                     @endforeach
