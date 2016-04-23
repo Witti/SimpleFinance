@@ -11,14 +11,14 @@
         </div>
         <div class="box-body">
             <div class="panel-body">
-                <form class="form-horizontal" role="form" method="POST" action="{{ url('/transaction/update', ['id' => $transaction->id]) }}">
+                <form class="form-horizontal" role="form" method="POST" action="{{ url('/transaction/store') }}">
                     {!! csrf_field() !!}
 
                     <div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
                         <label class="col-md-4 control-label">Type</label>
 
                         <div class="col-md-6">
-                            {!! Form::select('type', ['expense' => 'Expense','income' => 'Income'], $transaction->type,['class' => 'selectpicker']) !!}
+                            {!! Form::select('type', ['expense' => 'Expense','income' => 'Income'], $transaction->type, ['class' => 'form-control']) !!}
 
                             @if ($errors->has('type'))
                                 <span class="help-block">
@@ -85,7 +85,7 @@
                     </div>
 
                     <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
-                        <label class="col-md-4 control-label">Amount</label>
+                        <label class="col-md-4 control-label">Date</label>
 
                         <div class="col-md-6">
                             <div class="input-group date">
@@ -141,7 +141,7 @@
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
                             <button type="submit" class="btn btn-primary">
-                                Update transaction
+                                create transaction
                             </button>
                         </div>
                     </div>
