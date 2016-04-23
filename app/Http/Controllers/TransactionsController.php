@@ -116,11 +116,10 @@ class TransactionsController extends Controller
 
     public function edit($id) {
         $transaction = Transaction::findOrFail($id);
-        $account = $transaction->account;
         $accounts = Account::where('user_id',Auth::user()->id)->get()->lists('title','id');
         $categories = Category::where('user_id',Auth::user()->id)->get()->lists('title','id');
 
-        if($account->user_id === Auth::user()->id) {
+        if($transaction->account->user_id === Auth::user()->id) {
             return view('transaction/edit',compact('transaction','accounts','categories'));
         }
 
@@ -172,6 +171,24 @@ class TransactionsController extends Controller
             $transaction->save();
 
             return redirect('/transaction/account/' . $transaction->account->id)->with('status', 'Transaction updated');
+        }
+
+        return false;
+    }
+    
+    /**
+     * show form for duplication process
+     *
+     * @param $id
+     * @return \Illuminate\View\View|bool
+     */
+    public function duplicate($id) {
+        $transaction = Transaction::findOrFail($id);
+        $accounts = Account::where('user_id',Auth::user()->id)->get()->lists('title','id');
+        $categories = Category::where('user_id',Auth::user()->id)->get()->lists('title','id');
+
+        if($transaction->account->user_id === Auth::user()->id) {
+            return view('transaction/duplicate',compact('transaction','accounts','categories'));
         }
 
         return false;

@@ -18,7 +18,7 @@
         </section>
         <div class="row">
             @foreach($accounts as $a)
-                <div class="col-lg-3 col-xs-7">
+                <div class="col-lg-3">
                     <!-- small box -->
                     <div class="small-box @if($a->currentBalanceRaw < 0) bg-red @else bg-green @endif">
                         <div class="inner">
@@ -38,7 +38,7 @@
     @endif
     @if(isset($categoryusage) && $categoryusage && count($categoryusage) > 0)
         <div class="row">
-            <div class="col-lg-3 col-xs-7">
+            <div class="col-lg-3">
                 <div class="box box-default">
                     <div class="box-header with-border">
                         <h3 class="box-title">Category Usage</h3>

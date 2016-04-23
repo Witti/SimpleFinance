@@ -14,7 +14,7 @@
                 </div>
                 <div class="box-body">
                     <div class="pull-right" style="margin-bottom:1em;">
-                        <strong>Current balance {{ number_format ( $currentbalance ,2, ",", "." ) }}</strong>
+                        <strong>Current Balance {{ number_format ( $currentbalance ,2, ",", "." ) }}</strong>
                     </div>
                     <div style="clear:both;"></div>
                     <table id="transactionstable" class="table table-striped table-hover table-responsive">
@@ -49,12 +49,25 @@
                                     {{ $t->amountFormatted }}
                                 </td>
                                 <td align="right">
-                                    @if($t->lending_id)
-                                        <a href="{{ url('/lending', ['id' => $t->lending_id]) }}" class="text-primary" title="edit lending"><i class="fa fa-medkit" aria-hidden="true"></i></a>
-                                    @else
-                                        <a href="{{ url('/lending/create/transaction', ['id' => $t->id]) }}" class="text-primary" title="create lending from transaction"><i class="fa fa-medkit" aria-hidden="true"></i></a>
-                                    @endif
-                                        <a href="{{ url('/transaction/edit', ['id' => $t->id]) }}" class="text-primary"><i class="fa fa-pencil" aria-hidden="true"></i></a> <a class="text-primary delthis" href="{{ url('/transaction/delete', ['id' => $t->id]) }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+
+                                    <div class="dropdown">
+                                        <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="editDropdown{{ $t->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            Edit
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            @if($t->lending_id)
+                                                <li><a href="{{ url('/lending', ['id' => $t->lending_id]) }}" class="text-primary" title="edit lending"><i class="fa fa-medkit" aria-hidden="true"></i>Open Lending</a></li>
+                                            @else
+                                                <li><a href="{{ url('/lending/create/transaction', ['id' => $t->id]) }}" class="text-primary" title="create lending from transaction"><i class="fa fa-medkit" aria-hidden="true"></i>Create Lending</a></li>
+                                            @endif
+                                            <li role="separator" class="divider"></li>
+                                            <li><a href="{{ url('/transaction/duplicate', ['id' => $t->id]) }}" class="text-primary"><i class="fa fa-files-o" aria-hidden="true"></i>Duplicate</a></li>
+                                            <li><a href="{{ url('/transaction/edit', ['id' => $t->id]) }}" class="text-primary"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</a></li>
+                                            <li><a class="text-primary" href="{{ url('/transaction/delete', ['id' => $t->id]) }}"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a></li>
+                                        </ul>
+                                    </div>
+
                                 </td>
                             </tr>
                         @endforeach
