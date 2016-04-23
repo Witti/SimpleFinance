@@ -64,7 +64,7 @@
                                             <li role="separator" class="divider"></li>
                                             <li><a href="{{ url('/transaction/duplicate', ['id' => $t->id]) }}" class="text-primary"><i class="fa fa-files-o" aria-hidden="true"></i>Duplicate</a></li>
                                             <li><a href="{{ url('/transaction/edit', ['id' => $t->id]) }}" class="text-primary"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</a></li>
-                                            <li><a class="text-primary" href="{{ url('/transaction/delete', ['id' => $t->id]) }}"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a></li>
+                                            <li><a class="text-primary delthis" href="{{ url('/transaction/delete', ['id' => $t->id]) }}"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a></li>
                                         </ul>
                                     </div>
 
