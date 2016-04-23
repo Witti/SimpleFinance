@@ -50,6 +50,7 @@ class AccountsController extends Controller
         if($account->user_id === Auth::user()->id) {
             $account->title = Input::get('title');
             $account->startbalance = Input::get('startbalance');
+            $account->finanicaloverview = Input::get('finanicaloverview') === 'on' ? 1 : 0;
             $account->save();
             return redirect('account')->with('status', 'Account updated!');
         }
@@ -66,6 +67,7 @@ class AccountsController extends Controller
         $account = New Account();
         $account->title = Input::get('title');
         $account->startbalance = Input::get('startbalance');
+        $account->finanicaloverview = Input::get('finanicaloverview') === 'on' ? 1 : 0;
         $account->user_id = Auth::user()->id;
         $account->save();
 

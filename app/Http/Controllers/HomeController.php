@@ -27,6 +27,20 @@ class HomeController extends Controller
             ->get('total','category_id','categories.title','categories.color');
 
         $accounts = Account::where('user_id',Auth::user()->id)->with('transactions')->get();
-        return view('home', compact('accounts','categoryusage'));
+        $overviewaccounts = $accounts->where('finanicaloverview',1);
+
+        $financialoverview = [
+            'incomes' => 0,
+            'expenses' => 0,
+            'current' => 0
+        ];
+
+        foreach($overviewaccounts as $account) {
+            $financialoverview['expenses'] += $account->transactions->where('type','expense')->sum('amount');
+            $financialoverview['incomes'] += $account->transactions->where('type','income')->sum('amount');
+            $financialoverview['current'] += $account->currentBalanceRaw;
+        }
+        
+        return view('home', compact('accounts','categoryusage','financialoverview'));
     }
 }
