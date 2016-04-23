@@ -10,6 +10,47 @@
 </section>
 <section class="content">
     @include('layouts.partials.alert')
+    <section class="content-header">
+        <h4>Financial Overview</h4>
+    </section>
+    <div class="row">
+        <div class="col-lg-3">
+            <!-- small box -->
+            <div class="small-box @if($financialoverview['current'] < 0) bg-red @else bg-green @endif">
+                <div class="inner">
+                    <h3>{{ round($financialoverview['current'],2) }}</h3>
+                    <p>Current <small>incl. Startbalance</small></p>
+                </div>
+                <div class="icon">
+                    <i class="ion @if($financialoverview['current'] < 0) ion-arrow-graph-down-right @else ion-arrow-graph-up-right @endif"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3>{{ $financialoverview['incomes'] }}</h3>
+                    <p>Earnings <small>excl. Startbalance</small></p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-arrow-graph-up-right"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <!-- small box -->
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h3>{{ $financialoverview['expenses'] }}</h3>
+                    <p>Expenses <small>excl. Startbalance</small></p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-arrow-graph-down-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
     @if($accounts)
         <section class="content-header">
             <h4>
