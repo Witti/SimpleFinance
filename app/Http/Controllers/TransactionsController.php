@@ -193,4 +193,15 @@ class TransactionsController extends Controller
 
         return false;
     }
+
+    /**
+     * show form for creating a repeated transaction
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function createRepeated() {
+        $accounts = Auth::user()->accounts()->get()->lists('title','id');
+        $categories = Auth::user()->categories()->get()->lists('title','id');
+        return view('transaction/repeated/create',compact('accounts','categories'));
+    }
 }

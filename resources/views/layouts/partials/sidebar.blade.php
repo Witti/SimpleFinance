@@ -43,7 +43,7 @@
             </li>
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-plus-square"></i> <span>Create transactions</span>
+                    <i class="fa fa-plus-square"></i> <span>Create transaction</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
@@ -56,6 +56,7 @@
                     @endif
                 </ul>
             </li>
+            <li class=""><a href="{{ url('/transaction/repeated/create') }}"><i class="fa fa-repeat"></i> Create repeated transaction</a></li>
             <li class="{{setActive('lending')}}"><a href="{{ url('/lending') }}"><i class="fa fa-medkit"></i> <span>Lendings</span></a></li>
         </ul>
         @endif
