@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Input;
 use SimpleFinance\Transaction;
 use SimpleFinance\Account;
 use SimpleFinance\Category;
+use SimpleFinance\RepatedTransaction;
 
 class TransactionsController extends Controller
 {
@@ -175,7 +176,7 @@ class TransactionsController extends Controller
 
         return false;
     }
-    
+
     /**
      * show form for duplication process
      *
@@ -203,5 +204,44 @@ class TransactionsController extends Controller
         $accounts = Auth::user()->accounts()->get()->lists('title','id');
         $categories = Auth::user()->categories()->get()->lists('title','id');
         return view('transaction/repeated/create',compact('accounts','categories'));
+    }
+
+    /*
+     * store repeated transaction
+     * 
+     */
+    public function storeRepeated() {
+        //Validate input
+        $account = Account::where('id',Input::get('accountid'))->where('user_id',Auth::id())->firstOrFail();
+        $category = Category::where('id',Input::get('category_id'))->where('user_id',Auth::id())->firstOrFail();
+        $transferaccount = false;
+        $transfer = false;
+
+        if(Input::get('transfer')) {
+            $transferaccount = Account::where('id',Input::get('transfer_account_id'))->where('user_id',Auth::id())->firstOrFail();
+            $transfer = true;
+        }
+
+        $transaction = New RepatedTransaction();
+        $transaction->user_id = Auth::id();
+        $transaction->category_id = $category->id;
+        $transaction->account_id = $account->id;
+        $transaction->type = Input::get('type');
+        $transaction->amount = Input::get('amount');
+        $transaction->startdate = date('Y-m-d', strtotime(Input::get('startdate')));
+        $transaction->rmode = Input::get('rmode');
+        $transaction->rinterval = Input::get('rinterval');
+        $transaction->transfer = $transfer;
+        if($transfer) {
+            $transaction->transfer_account_id = $transferaccount->id;
+        }
+
+        $transaction->save();
+
+
+
+
+
+        //check if startdate is today => create a transaction
     }
 }
