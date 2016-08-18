@@ -11,7 +11,7 @@
             </div>
             <div class="box-body">
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/transaction/store') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/transaction/repeated/store') }}">
                         {!! csrf_field() !!}
 
                         <div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
@@ -32,7 +32,7 @@
                             <label class="col-md-4 control-label">Account</label>
 
                             <div class="col-md-6">
-                                {!! Form::select('category_id', $accounts, old('accountid'),['class' => 'form-control']) !!}
+                                {!! Form::select('accountid', $accounts, old('accountid'),['class' => 'form-control']) !!}
                                 @if ($errors->has('accountid'))
                                     <span class="help-block">
                                     <strong>{{ $errors->first('accountid') }}</strong>
@@ -103,16 +103,16 @@
                             <label class="col-md-4 control-label">Repeat every</label>
 
                             <div class="col-md-1">
-                                <input type="number" class="form-control" name="rreoccurance" value="{{ old('rreoccurance',1) }}">
-                                @if ($errors->has('rreoccurance'))
+                                <input type="number" class="form-control" name="rinterval" value="{{ old('rinterval',1) }}">
+                                @if ($errors->has('rinterval'))
                                     <span class="help-block">
-                                    <strong>{{ $errors->first('rreoccurance') }}</strong>
+                                    <strong>{{ $errors->first('rinterval') }}</strong>
                                 </span>
                                 @endif
                             </div>
 
                             <div class="col-md-1">
-                                {!! Form::select('rmode', ['week' => 'week','month' => 'month','year' => 'year'], old('type'),['class' => 'form-control']) !!}
+                                {!! Form::select('rmode', ['day' => 'day','week' => 'week','month' => 'month','year' => 'year'], old('type'),['class' => 'form-control']) !!}
                                 @if ($errors->has('rmode'))
                                     <span class="help-block">
                                     <strong>{{ $errors->first('rmode') }}</strong>
