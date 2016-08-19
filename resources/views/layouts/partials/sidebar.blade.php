@@ -41,23 +41,8 @@
                     @endif
                 </ul>
             </li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-plus-square"></i> <span>Create transaction</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    @if($accounts)
-                        @foreach($accounts as $account)
-                            <li class="active"><a href="{{ url('/transaction/create/account', ['id' => $account->id]) }}"><i class="fa fa-circle-o"></i> {{ $account->title }}</a></li>
-                        @endforeach
-                    @else
-                        <li><a href="{{ url('/account/create') }}"><i class="fa fa-circle-o"></i> Create account</a></li>
-                    @endif
-                </ul>
-            </li>
-            <li class=""><a href="{{ url('/transaction/repeated/create') }}"><i class="fa fa-repeat"></i> Create repeated transaction</a></li>
-            <li class="{{setActive('lending')}}"><a href="{{ url('/lending') }}"><i class="fa fa-medkit"></i> <span>Lendings</span></a></li>
+            <li class=""><a href="{{ url('/transaction/repeated') }}"><i class="fa fa-repeat"></i> Repeated Transactions</a></li>
+            <li class="{{setActive('lending')}}"><a href="{{ url('/lending') }}"><i class="fa fa-medkit"></i> Lendings</a></li>
         </ul>
         @endif
     </section>

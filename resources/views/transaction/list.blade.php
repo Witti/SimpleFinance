@@ -9,7 +9,16 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Transaction for {{ $account->title }}</h3>
                     <div class="box-tools pull-right">
-                        <a class="btn btn-box-tool" href="{{ url('/transaction/create/account', ['id' => $account->id]) }}" title="Add new account"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+                        <div class="dropdown">
+                            <button class="btn btn-primary btn-s dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                add transaction
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuaddTransaction">
+                                <li><a href="{{ url('/transaction/create/account', ['id' => $account->id]) }}" class="text-primary" title="edit lending"><i class="glyphicon glyphicon-plus-sign" aria-hidden="true"></i>regular transaction</a></li>
+                                <li><a href="{{ url('/transaction/repeated/create') }}" class="text-primary" title="edit lending"><i class="fa fa-repeat"></i>repeated transaction</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="box-body">
