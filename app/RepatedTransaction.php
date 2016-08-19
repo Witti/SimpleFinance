@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use \Numberformatter;
 use \IntlDateFormatter;
 use \Locale;
+use Carbon\Carbon;
 
 use Jedrzej\Searchable\SearchableTrait;
 
@@ -64,6 +65,23 @@ class RepatedTransaction extends Model
             IntlDateFormatter::GREGORIAN
         );
         return $fmt->format(strtotime($value));
+    }
+
+    public function getStartdateRawAttribute() {
+        return new Carbon($this->attributes['startdate']);
+    }
+
+    public function getRmodeRuleFormatedAttribute() {
+        switch ($this->attributes['rmode']) {
+            case "day":
+                return 'daily';
+            case "month":
+                return 'monthly';
+            case "week":
+                return 'weekly';
+            case 'year':
+                return 'yearly';
+        }
     }
 
     public function transferTransaction() {
