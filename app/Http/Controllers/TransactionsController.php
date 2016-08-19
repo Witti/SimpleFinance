@@ -54,7 +54,6 @@ class TransactionsController extends Controller
             if(Input::get('transfer') && Input::get('transfer_account_id')) {
                 $transferAccount = Account::findOrFail(Input::get('transfer_account_id'));
                 if($transferAccount->user_id === Auth::user()->id) {
-
                     if (Input::get('type') == 'expense') {
                         $transferTransactionType = 'income';
                     } else {
@@ -222,25 +221,62 @@ class TransactionsController extends Controller
             $transfer = true;
         }
 
-        $transaction = New RepatedTransaction();
-        $transaction->user_id = Auth::id();
-        $transaction->category_id = $category->id;
-        $transaction->account_id = $account->id;
-        $transaction->type = Input::get('type');
-        $transaction->amount = Input::get('amount');
-        $transaction->startdate = date('Y-m-d', strtotime(Input::get('startdate')));
-        $transaction->rmode = Input::get('rmode');
-        $transaction->rinterval = Input::get('rinterval');
-        $transaction->transfer = $transfer;
+        $rtransaction = New RepatedTransaction();
+        $rtransaction->user_id = Auth::id();
+        $rtransaction->category_id = $category->id;
+        $rtransaction->account_id = $account->id;
+        $rtransaction->type = Input::get('type');
+        $rtransaction->amount = Input::get('amount');
+        $rtransaction->label = Input::get('label');
+        $rtransaction->startdate = date('Y-m-d', strtotime(Input::get('startdate')));
+        $rtransaction->rmode = Input::get('rmode');
+        $rtransaction->rinterval = Input::get('rinterval');
+        $rtransaction->transfer = $transfer;
         if($transfer) {
-            $transaction->transfer_account_id = $transferaccount->id;
+            $rtransaction->transfer_account_id = $transferaccount->id;
+        }
+        $rtransaction->save();
+
+        if(date('Y-m-d', strtotime(Input::get('startdate'))) == date('Y-m-d')) {
+            $transaction = New Transaction();
+            $transaction->account_id = $account->id;
+            $transaction->category_id = $category->id;
+            $transaction->label = Input::get('label');
+            $transaction->type = Input::get('type');
+            $transaction->transactiondate = date('Y-m-d',strtotime(Input::get('startdate')));
+            $transaction->amount = Input::get('amount');
+            $transaction->save();
+
+            if(Input::get('transfer') && Input::get('transfer_account_id')) {
+                $transferAccount = Account::findOrFail(Input::get('transfer_account_id'));
+                if ($transferAccount->user_id === Auth::user()->id) {
+
+                    if (Input::get('type') == 'expense') {
+                        $transferTransactionType = 'income';
+                    } else {
+                        $transferTransactionType = 'expense';
+                    }
+
+                    $transferTransaction = Transaction::findOrNew($transaction->transfer_id);
+                    $transferTransaction->account_id = Input::get('transfer_account_id');
+                    $transferTransaction->category_id = Input::get('category_id');
+                    $transferTransaction->label = Input::get('label');
+                    $transferTransaction->type = $transferTransactionType;
+                    $transferTransaction->transactiondate = date('Y-m-d', strtotime(Input::get('startdate')));
+                    $transferTransaction->amount = Input::get('amount');
+                    $transferTransaction->transfer_id = $transaction->id;
+                    $transferTransaction->save();
+
+                    $transaction->transfer_id = $transferTransaction->id;
+                    $transaction->save();
+                } else {
+                    return redirect('home')->with('status', 'You are not allowed to add an transaction to this account.');
+                }
+            }
         }
 
-        $transaction->save();
-
-
-
-
+        return redirect('/transaction/repeated/')->with('status', 'Transaction created');
+    }
 
     public function indexRepeated() {
         $transactions = RepatedTransaction::where('user_id',Auth::id())->get();
