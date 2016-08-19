@@ -21,7 +21,9 @@ class RepatedTransaction extends Model
 
     public function __construct()
     {
-        $this->locale = Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+        if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+            $this->locale = Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+        }
     }
 
     public function account() {
