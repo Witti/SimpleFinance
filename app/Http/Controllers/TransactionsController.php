@@ -242,6 +242,8 @@ class TransactionsController extends Controller
 
 
 
-        //check if startdate is today => create a transaction
+    public function indexRepeated() {
+        $transactions = RepatedTransaction::where('user_id',Auth::id())->get();
+        return view('transaction/repeated/index',compact('transactions'));
     }
 }

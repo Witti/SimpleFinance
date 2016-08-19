@@ -47,6 +47,7 @@ Route::group(['middleware' => ['web','auth']], function () {
     Route::get('/transaction/duplicate/{id}', 'TransactionsController@duplicate');
     Route::post('/transaction/update/{id}', 'TransactionsController@update');
 
+    Route::get('/transaction/repeated', 'TransactionsController@indexRepeated');
     Route::get('/transaction/repeated/create', 'TransactionsController@createRepeated');
     Route::post('/transaction/repeated/store', 'TransactionsController@storeRepeated');
 
