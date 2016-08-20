@@ -4,14 +4,14 @@
     <section class="sidebar">
         @if(!Auth::guest())
         <!-- Sidebar user panel -->
-        <div class="user-panel">
+        <!--<div class="user-panel">
             <div class="pull-left image">
                 <img src="{{ gravatar(Auth::user()->email) }}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p>{{ Auth::user()->name }}</p>
             </div>
-        </div>
+        </div>-->
         <!-- search form -->
         <!--<form action="#" method="get" class="sidebar-form">
             <div class="input-group">
@@ -41,22 +41,8 @@
                     @endif
                 </ul>
             </li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-plus-square"></i> <span>Create transactions</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    @if($accounts)
-                        @foreach($accounts as $account)
-                            <li class="active"><a href="{{ url('/transaction/create/account', ['id' => $account->id]) }}"><i class="fa fa-circle-o"></i> {{ $account->title }}</a></li>
-                        @endforeach
-                    @else
-                        <li><a href="{{ url('/account/create') }}"><i class="fa fa-circle-o"></i> Create account</a></li>
-                    @endif
-                </ul>
-            </li>
-            <li class="{{setActive('lending')}}"><a href="{{ url('/lending') }}"><i class="fa fa-medkit"></i> <span>Lendings</span></a></li>
+            <li class=""><a href="{{ url('/transaction/repeated') }}"><i class="fa fa-repeat"></i> Repeated Transactions</a></li>
+            <li class="{{setActive('lending')}}"><a href="{{ url('/lending') }}"><i class="fa fa-medkit"></i> Lendings</a></li>
         </ul>
         @endif
     </section>

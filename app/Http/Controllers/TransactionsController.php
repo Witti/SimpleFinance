@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Input;
 use SimpleFinance\Transaction;
 use SimpleFinance\Account;
 use SimpleFinance\Category;
+use SimpleFinance\RepatedTransaction;
 
 class TransactionsController extends Controller
 {
@@ -53,7 +54,6 @@ class TransactionsController extends Controller
             if(Input::get('transfer') && Input::get('transfer_account_id')) {
                 $transferAccount = Account::findOrFail(Input::get('transfer_account_id'));
                 if($transferAccount->user_id === Auth::user()->id) {
-
                     if (Input::get('type') == 'expense') {
                         $transferTransactionType = 'income';
                     } else {
@@ -136,7 +136,6 @@ class TransactionsController extends Controller
             $transaction->type = Input::get('type');
             $transaction->amount = Input::get('amount');
 
-
             if(Input::get('transfer') && Input::get('transfer_account_id')) {
                 $transferAccount = Account::findOrFail(Input::get('transfer_account_id'));
                 if($transferAccount->user_id === Auth::user()->id) {
@@ -175,7 +174,7 @@ class TransactionsController extends Controller
 
         return false;
     }
-    
+
     /**
      * show form for duplication process
      *
@@ -192,5 +191,98 @@ class TransactionsController extends Controller
         }
 
         return false;
+    }
+
+    /**
+     * show form for creating a repeated transaction
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function createRepeated() {
+        $accounts = Auth::user()->accounts()->get()->lists('title','id');
+        $categories = Auth::user()->categories()->get()->lists('title','id');
+        return view('transaction/repeated/create',compact('accounts','categories'));
+    }
+
+    /*
+     * store repeated transaction
+     * 
+     */
+    public function storeRepeated() {
+        //Validate input
+        $account = Account::where('id',Input::get('accountid'))->where('user_id',Auth::id())->firstOrFail();
+        $category = Category::where('id',Input::get('category_id'))->where('user_id',Auth::id())->firstOrFail();
+        $transferaccount = false;
+        $transfer = false;
+
+        if(Input::get('transfer')) {
+            $transferaccount = Account::where('id',Input::get('transfer_account_id'))->where('user_id',Auth::id())->firstOrFail();
+            $transfer = true;
+        }
+
+        $rtransaction = New RepatedTransaction();
+        $rtransaction->user_id = Auth::id();
+        $rtransaction->category_id = $category->id;
+        $rtransaction->account_id = $account->id;
+        $rtransaction->type = Input::get('type');
+        $rtransaction->amount = Input::get('amount');
+        $rtransaction->label = Input::get('label');
+        $rtransaction->startdate = date('Y-m-d', strtotime(Input::get('startdate')));
+        $rtransaction->rmode = Input::get('rmode');
+        $rtransaction->transfer = $transfer;
+        if($transfer) {
+            $rtransaction->transfer_account_id = $transferaccount->id;
+        }
+        $rtransaction->save();
+
+        return redirect('/transaction/repeated/')->with('status', 'Transaction created');
+    }
+
+    public function indexRepeated() {
+        $transactions = RepatedTransaction::where('user_id',Auth::id())->get();
+        return view('transaction/repeated/index',compact('transactions'));
+    }
+
+    public function editRepeated($id) {
+        $transaction = RepatedTransaction::where('user_id',Auth::id())->where('id',$id)->firstOrFail();
+        $accounts = Auth::user()->accounts()->get()->lists('title','id');
+        $categories = Auth::user()->categories()->get()->lists('title','id');
+        return view('transaction/repeated/edit',compact('transaction','accounts','categories'));
+    }
+
+    public function updateRepeated($id) {
+        $rtransaction = RepatedTransaction::where('user_id',Auth::id())->where('id',$id)->firstOrFail();
+        $account = Account::where('user_id',Auth::id())->where('id',Input::get('accountid'))->firstOrFail();
+        $category = Category::where('user_id',Auth::id())->where('id',Input::get('category_id'))->firstOrFail();
+
+        $transferaccount = false;
+        $transfer = false;
+
+        if(Input::get('transfer')) {
+            $transferaccount = Account::where('id',Input::get('transfer_account_id'))->where('user_id',Auth::id())->firstOrFail();
+            $transfer = true;
+        }
+
+        $rtransaction->user_id = Auth::id();
+        $rtransaction->category_id = $category->id;
+        $rtransaction->account_id = $account->id;
+        $rtransaction->type = Input::get('type');
+        $rtransaction->amount = Input::get('amount');
+        $rtransaction->label = Input::get('label');
+        $rtransaction->startdate = date('Y-m-d', strtotime(Input::get('startdate')));
+        $rtransaction->rmode = Input::get('rmode');
+        $rtransaction->transfer = $transfer;
+        if($transfer) {
+            $rtransaction->transfer_account_id = $transferaccount->id;
+        }
+        $rtransaction->save();
+
+        return redirect('/transaction/repeated/')->with('status', 'Transaction updated');
+    }
+
+    public function deleteRepeated($id) {
+        $rtransaction = RepatedTransaction::where('user_id',Auth::id())->where('id',$id)->firstOrFail();
+        $rtransaction->delete();
+        return redirect('/transaction/repeated/')->with('status', 'Transaction deleted');
     }
 }

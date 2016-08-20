@@ -6,17 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 use \Numberformatter;
 use \IntlDateFormatter;
 use \Locale;
+use Carbon\Carbon;
 
 use Jedrzej\Searchable\SearchableTrait;
 
-class Transaction extends Model
+class RepatedTransaction extends Model
 {
-
     use SearchableTrait;
 
     public $searchable = ['label'];
-    protected $fillable = ['label','amount','type'];
-    protected $dates = ['created_at', 'updated_at', 'transactiondate'];
+    protected $fillable = ['label','amount','type','user_id','account_id','category_id','startdate','rmode','rinterval','transfer','transfer_account_id'];
+    protected $dates = ['created_at', 'updated_at', 'startdate'];
+    protected $table = "repatedTransactions";
     public $locale = false;
 
     public function __construct()
@@ -32,6 +33,10 @@ class Transaction extends Model
 
     public function category() {
         return $this->belongsTo(Category::class);
+    }
+
+    public function owner() {
+        return $this->belongsTo(User::class);
     }
 
     public function getAmountFormattedAttribute() {
@@ -51,7 +56,7 @@ class Transaction extends Model
         }
     }
 
-    public function getTransactiondateAttribute($value) {
+    public function getStartdateAttribute($value) {
         $fmt = new IntlDateFormatter(
             $this->locale,
             IntlDateFormatter::SHORT,
@@ -62,11 +67,24 @@ class Transaction extends Model
         return $fmt->format(strtotime($value));
     }
 
-    public function transferTransaction() {
-        return $this->belongsTo(Transaction::class,'transfer_id','id');
+    public function getStartdateRawAttribute() {
+        return new Carbon($this->attributes['startdate']);
     }
 
-    public function lending() {
-        return $this->belongsTo(Lending::class, 'lending_id','id');
+    public function getRmodeRuleFormatedAttribute() {
+        switch ($this->attributes['rmode']) {
+            case "day":
+                return 'daily';
+            case "month":
+                return 'monthly';
+            case "week":
+                return 'weekly';
+            case 'year':
+                return 'yearly';
+        }
+    }
+
+    public function transferTransaction() {
+        return $this->belongsTo(Transaction::class,'transfer_id','id');
     }
 }
