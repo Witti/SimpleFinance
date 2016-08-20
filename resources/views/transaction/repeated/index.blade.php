@@ -30,18 +30,18 @@
                         <th>Interval</th>
                         <th>Label</th>
                         <th>Amount</th>
-                        <th>Category</th>
+                        <th class="hidden-xs">Category</th>
                         <th>&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($transactions as $t)
-                        <tr class="@if($t->type == "expense") warning @else success @endif">
+                        <tr>
                             <td>{{ $t->startdate }}</td>
-                            <td>every {{ $t->rinterval }} {{ $t->rmode }}</td>
+                            <td>repeat {{ $t->rmodeRuleFormated }}</td>
                             <td>{{ $t->label }}</td>
                             <td>{{ $t->amountFormatted }}</td>
-                            <td>{{ $t->category->title }}</td>
+                            <td class="hidden-xs">{{ $t->category->title }}</td>
                             <td align="right">
                                 <div class="dropdown">
                                     <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="editDropdown{{ $t->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">

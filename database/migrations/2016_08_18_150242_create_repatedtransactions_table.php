@@ -22,7 +22,6 @@ class CreateRepatedtransactionsTable extends Migration
             $table->string('label');
             $table->date('startdate');
             $table->enum('rmode',['year','month','week','day']);
-            $table->integer('rinterval')->unsigned()->default(1);
             $table->boolean('transfer');
             $table->integer('transfer_account_id')->unsigned()->nullable();
             $table->timestamps();

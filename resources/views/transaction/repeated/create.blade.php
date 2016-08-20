@@ -14,7 +14,7 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/transaction/repeated/store') }}">
                         {!! csrf_field() !!}
 
-                        <div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Type</label>
 
                             <div class="col-md-6">
@@ -101,25 +101,14 @@
 
                         <div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Repeat every</label>
-
                             <div class="col-md-1">
-                                <input type="number" class="form-control" name="rinterval" value="{{ old('rinterval',1) }}">
-                                @if ($errors->has('rinterval'))
-                                    <span class="help-block">
-                                    <strong>{{ $errors->first('rinterval') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-
-                            <div class="col-md-1">
-                                {!! Form::select('rmode', ['day' => 'day','week' => 'week','month' => 'month','year' => 'year'], old('type'),['class' => 'form-control']) !!}
+                                {!! Form::select('rmode', ['day' => 'day','week' => 'week','month' => 'month','year' => 'year'], old('rmode'),['class' => 'form-control']) !!}
                                 @if ($errors->has('rmode'))
                                     <span class="help-block">
                                     <strong>{{ $errors->first('rmode') }}</strong>
                                 </span>
                                 @endif
                             </div>
-
                         </div>
 
                         <div class="form-group{{ $errors->has('transfer') ? ' has-error' : '' }}">
