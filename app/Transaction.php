@@ -54,7 +54,7 @@ class Transaction extends Model
     public function getTransactiondateAttribute($value) {
         $fmt = new IntlDateFormatter(
             $this->locale,
-            IntlDateFormatter::SHORT,
+            IntlDateFormatter::MEDIUM,
             IntlDateFormatter::NONE,
             config('app.timezone'),
             IntlDateFormatter::GREGORIAN

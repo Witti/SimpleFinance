@@ -59,7 +59,7 @@ class RepatedTransaction extends Model
     public function getStartdateAttribute($value) {
         $fmt = new IntlDateFormatter(
             $this->locale,
-            IntlDateFormatter::SHORT,
+            IntlDateFormatter::MEDIUM,
             IntlDateFormatter::NONE,
             config('app.timezone'),
             IntlDateFormatter::GREGORIAN
