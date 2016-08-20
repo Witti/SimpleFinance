@@ -84,7 +84,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
+                    <div class="form-group{{ $errors->has('transactiondate') ? ' has-error' : '' }}">
                         <label class="col-md-4 control-label">Date</label>
 
                         <div class="col-md-6">
@@ -92,9 +92,9 @@
                                 <input type="text" class="form-control" name="transactiondate" value="@if( $transaction->transactiondate != '0000-00-00'){{ date('d.m.Y',strtotime($transaction->transactiondate)) }}@else{{ $transaction->created_at->format('d.m.Y') }}@endif" data-date-format="dd.mm.yyyy"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                             </div>
 
-                            @if ($errors->has('amount'))
+                            @if ($errors->has('transactiondate'))
                                 <span class="help-block">
-                                <strong>{{ $errors->first('amount') }}</strong>
+                                <strong>{{ $errors->first('transactiondate') }}</strong>
                             </span>
                             @endif
                         </div>
