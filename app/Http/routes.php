@@ -49,7 +49,10 @@ Route::group(['middleware' => ['web','auth']], function () {
 
     Route::get('/transaction/repeated', 'TransactionsController@indexRepeated');
     Route::get('/transaction/repeated/create', 'TransactionsController@createRepeated');
+    Route::get('/transaction/repeated/edit/{id}', 'TransactionsController@editRepeated');
     Route::post('/transaction/repeated/store', 'TransactionsController@storeRepeated');
+    Route::post('/transaction/repeated/update/{id}', 'TransactionsController@updateRepeated');
+    Route::get('transaction/repeated/delete/{id}', 'TransactionsController@deleteRepeated');
 
     Route::get('/category', 'CategoriesController@index');
     Route::post('/category/store', 'CategoriesController@store');
