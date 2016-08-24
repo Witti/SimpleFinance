@@ -24,8 +24,8 @@ class TransactionsController extends Controller
      */
     public function create($account_id) {
         $account = Account::findOrFail($account_id);
-        $accounts = Account::where('user_id',Auth::user()->id)->get()->lists('title','id');
-        $categories = Category::where('user_id',Auth::user()->id)->get()->lists('title','id');
+        $accounts = Account::where('user_id',Auth::user()->id)->get()->pluck('title','id');
+        $categories = Category::where('user_id',Auth::user()->id)->get()->pluck('title','id');
 
         if($account->user_id === Auth::user()->id) {
             if($categories) {
@@ -116,8 +116,8 @@ class TransactionsController extends Controller
 
     public function edit($id) {
         $transaction = Transaction::findOrFail($id);
-        $accounts = Account::where('user_id',Auth::user()->id)->get()->lists('title','id');
-        $categories = Category::where('user_id',Auth::user()->id)->get()->lists('title','id');
+        $accounts = Account::where('user_id',Auth::user()->id)->get()->pluck('title','id');
+        $categories = Category::where('user_id',Auth::user()->id)->get()->pluck('title','id');
 
         if($transaction->account->user_id === Auth::user()->id) {
             return view('transaction/edit',compact('transaction','accounts','categories'));
@@ -183,8 +183,8 @@ class TransactionsController extends Controller
      */
     public function duplicate($id) {
         $transaction = Transaction::findOrFail($id);
-        $accounts = Account::where('user_id',Auth::user()->id)->get()->lists('title','id');
-        $categories = Category::where('user_id',Auth::user()->id)->get()->lists('title','id');
+        $accounts = Account::where('user_id',Auth::user()->id)->get()->pluck('title','id');
+        $categories = Category::where('user_id',Auth::user()->id)->get()->pluck('title','id');
 
         if($transaction->account->user_id === Auth::user()->id) {
             return view('transaction/duplicate',compact('transaction','accounts','categories'));
@@ -199,8 +199,8 @@ class TransactionsController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function createRepeated() {
-        $accounts = Auth::user()->accounts()->get()->lists('title','id');
-        $categories = Auth::user()->categories()->get()->lists('title','id');
+        $accounts = Auth::user()->accounts()->get()->pluck('title','id');
+        $categories = Auth::user()->categories()->get()->pluck('title','id');
         return view('transaction/repeated/create',compact('accounts','categories'));
     }
 
@@ -245,8 +245,8 @@ class TransactionsController extends Controller
 
     public function editRepeated($id) {
         $transaction = RepatedTransaction::where('user_id',Auth::id())->where('id',$id)->firstOrFail();
-        $accounts = Auth::user()->accounts()->get()->lists('title','id');
-        $categories = Auth::user()->categories()->get()->lists('title','id');
+        $accounts = Auth::user()->accounts()->get()->pluck('title','id');
+        $categories = Auth::user()->categories()->get()->pluck('title','id');
         return view('transaction/repeated/edit',compact('transaction','accounts','categories'));
     }
 

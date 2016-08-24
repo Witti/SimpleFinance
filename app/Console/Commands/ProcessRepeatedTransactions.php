@@ -48,6 +48,7 @@ class ProcessRepeatedTransactions extends Command
         foreach($transactions as $t) {
             $r = new When();
             $r->startDate($t->startdateRaw)->freq($t->rmodeRuleFormated);
+            $r->generateOccurrences();
             if($r->occursOn(New Carbon())) {
                 $this->info('Creating transaction - ' . $t->label);
                 $transaction = New Transaction();
