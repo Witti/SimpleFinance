@@ -160,7 +160,6 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
         Jenssegers\Rollbar\RollbarServiceProvider::class,
-        Sven\ArtisanView\ArtisanViewServiceProvider::class,
         Spatie\Activitylog\ActivitylogServiceProvider::class,
 
     ],
