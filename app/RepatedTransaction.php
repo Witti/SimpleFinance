@@ -8,13 +8,8 @@ use \IntlDateFormatter;
 use \Locale;
 use Carbon\Carbon;
 
-use Jedrzej\Searchable\SearchableTrait;
-
 class RepatedTransaction extends Model
 {
-    use SearchableTrait;
-
-    public $searchable = ['label'];
     protected $fillable = ['label','amount','type','user_id','account_id','category_id','startdate','rmode','rinterval','transfer','transfer_account_id'];
     protected $dates = ['created_at', 'updated_at', 'startdate'];
     protected $table = "repatedTransactions";

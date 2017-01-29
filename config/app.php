@@ -162,6 +162,12 @@ return [
         Jenssegers\Rollbar\RollbarServiceProvider::class,
         Spatie\Activitylog\ActivitylogServiceProvider::class,
 
+        /*
+         * Laravel Scout Stuff
+         */
+        Laravel\Scout\ScoutServiceProvider::class,
+        TeamTNT\Scout\TNTSearchScoutServiceProvider::class,
+
     ],
 
     /*

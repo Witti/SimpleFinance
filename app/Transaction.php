@@ -6,15 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use \Numberformatter;
 use \IntlDateFormatter;
 use \Locale;
-
-use Jedrzej\Searchable\SearchableTrait;
+use Laravel\Scout\Searchable;
 
 class Transaction extends Model
 {
+    use Searchable;
 
-    use SearchableTrait;
-
-    public $searchable = ['label'];
     protected $fillable = ['label','amount','type'];
     protected $dates = ['created_at', 'updated_at', 'transactiondate'];
     public $locale = false;
@@ -24,6 +21,20 @@ class Transaction extends Model
         if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
             $this->locale = Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
         }
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        // Customize array...
+
+        return $array;
     }
 
     public function account() {
