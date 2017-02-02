@@ -19,7 +19,8 @@
         "laravel/tinker": "^1.0",
         "laravel/scout": "^3.0",
         "maatwebsite/excel": "~2.1.0",
-        "teamtnt/laravel-scout-tntsearch-driver": "^2.0"
+        "teamtnt/laravel-scout-tntsearch-driver": "^2.0",
+        "wilgucki/csv": "^0.6.2"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",

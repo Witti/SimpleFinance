@@ -168,6 +168,11 @@ return [
         Laravel\Scout\ScoutServiceProvider::class,
         TeamTNT\Scout\TNTSearchScoutServiceProvider::class,
 
+        /*
+         * Import Stuff
+         */
+        Wilgucki\Csv\CsvServiceProvider::class,
+
     ],
 
     /*
@@ -215,6 +220,8 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
+        'CsvReader' => Wilgucki\Csv\Facades\Reader::class,
+        'CsvWriter' => Wilgucki\Csv\Facades\Writer::class,
 
     ],
 

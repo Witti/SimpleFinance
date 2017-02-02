@@ -14,6 +14,8 @@ use SimpleFinance\Account;
 use SimpleFinance\Category;
 use SimpleFinance\RepatedTransaction;
 
+use Wilgucki\Csv\Facades\Reader;
+
 class TransactionsController extends Controller
 {
      /**
@@ -284,5 +286,26 @@ class TransactionsController extends Controller
         $rtransaction = RepatedTransaction::where('user_id',Auth::id())->where('id',$id)->firstOrFail();
         $rtransaction->delete();
         return redirect('/transaction/repeated/')->with('status', 'Transaction deleted');
+    }
+
+    public function importTransactions() {
+        /*$reader = Reader::createFromPath('/Users/dan/Projekte/Privat/SimpleFinance/storage/import/elbi_umsaetze_20170202091913.csv');
+        $reader->setCsvControl(';');
+        $results = $reader->fetch();
+        foreach ($results as $row) {
+            var_dump($row);
+        }*/
+
+
+        $reader = Reader::open('/Users/dan/Projekte/Privat/SimpleFinance/storage/import/elbi_umsaetze_20170202091913.csv', ';', '\'', '\\\\');
+
+        while (($line = $reader->readLine()) !== false) {
+            print_r($line);
+            echo '<hr>';
+        }
+    }
+
+    public function processImport() {
+
     }
 }
